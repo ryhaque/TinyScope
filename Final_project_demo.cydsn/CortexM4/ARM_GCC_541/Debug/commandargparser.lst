@@ -1,0 +1,3942 @@
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m4
+   3              		.eabi_attribute 27, 1
+   4              		.fpu fpv4-sp-d16
+   5              		.eabi_attribute 20, 1
+   6              		.eabi_attribute 21, 1
+   7              		.eabi_attribute 23, 3
+   8              		.eabi_attribute 24, 1
+   9              		.eabi_attribute 25, 1
+  10              		.eabi_attribute 26, 1
+  11              		.eabi_attribute 30, 1
+  12              		.eabi_attribute 34, 1
+  13              		.eabi_attribute 18, 4
+  14              		.thumb
+  15              		.syntax unified
+  16              		.file	"commandargparser.c"
+  17              		.text
+  18              	.Ltext0:
+  19              		.cfi_sections	.debug_frame
+  20              		.section	.text.command_parser,"ax",%progbits
+  21              		.align	2
+  22              		.global	command_parser
+  23              		.thumb
+  24              		.thumb_func
+  25              		.type	command_parser, %function
+  26              	command_parser:
+  27              	.LFB637:
+  28              		.file 1 "commandargparser.c"
+   1:commandargparser.c **** /* ========================================
+   2:commandargparser.c ****  ** Command argument parser source file
+   3:commandargparser.c ****  * ========================================
+   4:commandargparser.c **** */
+   5:commandargparser.c **** 
+   6:commandargparser.c **** #include "project.h"
+   7:commandargparser.c **** #include "stdlib.h"
+   8:commandargparser.c **** #include "stdio.h"
+   9:commandargparser.c **** #include "string.h"
+  10:commandargparser.c **** #include "commandargparser.h"
+  11:commandargparser.c **** 
+  12:commandargparser.c **** /*This function is in charge of taking the string inputted by puttY
+  13:commandargparser.c ****   and parsing that string till we get the correct value
+  14:commandargparser.c ****   it takes as arguments global variables passed in from main*/
+  15:commandargparser.c **** 
+  16:commandargparser.c **** void command_parser(char* str,char mode[],int* trigger_level, char trigger_slope[],
+  17:commandargparser.c ****     int* trigger_channel,int* xscale, int* yscale, char startNstop[]){
+  29              		.loc 1 17 0
+  30              		.cfi_startproc
+  31              		@ args = 16, pretend = 0, frame = 8
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              	.LVL0:
+  34 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  35              		.cfi_def_cfa_offset 20
+  36              		.cfi_offset 4, -20
+  37              		.cfi_offset 5, -16
+  38              		.cfi_offset 6, -12
+  39              		.cfi_offset 7, -8
+  40              		.cfi_offset 14, -4
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 2
+
+
+  41 0002 83B0     		sub	sp, sp, #12
+  42              		.cfi_def_cfa_offset 32
+  43 0004 0446     		mov	r4, r0
+  44 0006 0D46     		mov	r5, r1
+  45 0008 1646     		mov	r6, r2
+  46 000a 1F46     		mov	r7, r3
+  18:commandargparser.c ****     //printf("\ncommand argument string = %s\r\n",str);
+  19:commandargparser.c ****     
+  20:commandargparser.c ****     /*check if start and stop are active*/
+  21:commandargparser.c ****     if(strstr(str,"start") != NULL){
+  47              		.loc 1 21 0
+  48 000c 6249     		ldr	r1, .L17
+  49              	.LVL1:
+  50 000e FFF7FEFF 		bl	strstr
+  51              	.LVL2:
+  52 0012 48B1     		cbz	r0, .L2
+  22:commandargparser.c ****         sscanf(str,"%s", startNstop);
+  53              		.loc 1 22 0
+  54 0014 0B9A     		ldr	r2, [sp, #44]
+  55 0016 6149     		ldr	r1, .L17+4
+  56 0018 2046     		mov	r0, r4
+  57 001a FFF7FEFF 		bl	sscanf
+  58              	.LVL3:
+  23:commandargparser.c ****         //respond
+  24:commandargparser.c ****         printf("\nProgram %s\r\n",startNstop);
+  59              		.loc 1 24 0
+  60 001e 0B99     		ldr	r1, [sp, #44]
+  61 0020 5F48     		ldr	r0, .L17+8
+  62 0022 FFF7FEFF 		bl	printf
+  63              	.LVL4:
+  64 0026 B4E0     		b	.L1
+  65              	.L2:
+  25:commandargparser.c ****     }
+  26:commandargparser.c ****     else if(strstr(str,"stop") != NULL){
+  66              		.loc 1 26 0
+  67 0028 5E49     		ldr	r1, .L17+12
+  68 002a 2046     		mov	r0, r4
+  69 002c FFF7FEFF 		bl	strstr
+  70              	.LVL5:
+  71 0030 48B1     		cbz	r0, .L4
+  27:commandargparser.c ****         sscanf(str,"%s", startNstop);
+  72              		.loc 1 27 0
+  73 0032 0B9A     		ldr	r2, [sp, #44]
+  74 0034 5949     		ldr	r1, .L17+4
+  75 0036 2046     		mov	r0, r4
+  76 0038 FFF7FEFF 		bl	sscanf
+  77              	.LVL6:
+  28:commandargparser.c ****         //respond
+  29:commandargparser.c ****         printf("\nProgram %s\r\n",startNstop);
+  78              		.loc 1 29 0
+  79 003c 0B99     		ldr	r1, [sp, #44]
+  80 003e 5848     		ldr	r0, .L17+8
+  81 0040 FFF7FEFF 		bl	printf
+  82              	.LVL7:
+  83 0044 A5E0     		b	.L1
+  84              	.L4:
+  30:commandargparser.c ****     }
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 3
+
+
+  31:commandargparser.c ****     /*check if set mode is free or trigger
+  32:commandargparser.c ****       in free run mode a free running signal is displayed
+  33:commandargparser.c ****       in trigger mode sampled signal is aligned so waveform is more stable
+  34:commandargparser.c ****     */
+  35:commandargparser.c ****     else if(strstr(str,"set mode") != NULL){
+  85              		.loc 1 35 0
+  86 0046 5849     		ldr	r1, .L17+16
+  87 0048 2046     		mov	r0, r4
+  88 004a FFF7FEFF 		bl	strstr
+  89              	.LVL8:
+  90 004e 48B1     		cbz	r0, .L5
+  36:commandargparser.c ****         sscanf(str,"set mode %s", mode);
+  91              		.loc 1 36 0
+  92 0050 2A46     		mov	r2, r5
+  93 0052 5649     		ldr	r1, .L17+20
+  94 0054 2046     		mov	r0, r4
+  95 0056 FFF7FEFF 		bl	sscanf
+  96              	.LVL9:
+  37:commandargparser.c ****         //respond
+  38:commandargparser.c ****         printf("\nMode set to %s running\r\n",mode);
+  97              		.loc 1 38 0
+  98 005a 2946     		mov	r1, r5
+  99 005c 5448     		ldr	r0, .L17+24
+ 100 005e FFF7FEFF 		bl	printf
+ 101              	.LVL10:
+ 102 0062 96E0     		b	.L1
+ 103              	.L5:
+  39:commandargparser.c ****     }
+  40:commandargparser.c ****     /*trigger level set 0-3v in steps of 100mV, Default=1V*/
+  41:commandargparser.c ****     else if(strstr(str,"set trigger_level") != NULL){
+ 104              		.loc 1 41 0
+ 105 0064 5349     		ldr	r1, .L17+28
+ 106 0066 2046     		mov	r0, r4
+ 107 0068 FFF7FEFF 		bl	strstr
+ 108              	.LVL11:
+ 109 006c 88B1     		cbz	r0, .L6
+ 110              	.LBB2:
+  42:commandargparser.c ****         sscanf(str,"set trigger_level %d", trigger_level);
+ 111              		.loc 1 42 0
+ 112 006e 524D     		ldr	r5, .L17+32
+ 113              	.LVL12:
+ 114 0070 3246     		mov	r2, r6
+ 115 0072 2946     		mov	r1, r5
+ 116 0074 2046     		mov	r0, r4
+ 117 0076 FFF7FEFF 		bl	sscanf
+ 118              	.LVL13:
+  43:commandargparser.c ****         
+  44:commandargparser.c ****         int nutrigger_level = (int)trigger_level;
+ 119              		.loc 1 44 0
+ 120 007a 02AA     		add	r2, sp, #8
+ 121 007c 42F8046D 		str	r6, [r2, #-4]!
+  45:commandargparser.c ****         sscanf(str,"set trigger_level %d", &nutrigger_level);
+ 122              		.loc 1 45 0
+ 123 0080 2946     		mov	r1, r5
+ 124 0082 2046     		mov	r0, r4
+ 125 0084 FFF7FEFF 		bl	sscanf
+ 126              	.LVL14:
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 4
+
+
+  46:commandargparser.c ****         //response
+  47:commandargparser.c ****         printf("\nTrigger level set to %d mV\r\n",nutrigger_level);
+ 127              		.loc 1 47 0
+ 128 0088 0199     		ldr	r1, [sp, #4]
+ 129 008a 4C48     		ldr	r0, .L17+36
+ 130 008c FFF7FEFF 		bl	printf
+ 131              	.LVL15:
+ 132              	.LBE2:
+ 133 0090 7FE0     		b	.L1
+ 134              	.LVL16:
+ 135              	.L6:
+  48:commandargparser.c ****     }
+  49:commandargparser.c ****     /*trigger slope positive - rising edge when signal crosses trigger level (default)
+  50:commandargparser.c ****       trigger slope negative - falling edge when signal crosses trigger level
+  51:commandargparser.c ****     */
+  52:commandargparser.c ****     else if(strstr(str,"set trigger_slope") != NULL){
+ 136              		.loc 1 52 0
+ 137 0092 4B49     		ldr	r1, .L17+40
+ 138 0094 2046     		mov	r0, r4
+ 139 0096 FFF7FEFF 		bl	strstr
+ 140              	.LVL17:
+ 141 009a 48B1     		cbz	r0, .L7
+  53:commandargparser.c ****         sscanf(str,"set trigger_slope %s", trigger_slope);
+ 142              		.loc 1 53 0
+ 143 009c 3A46     		mov	r2, r7
+ 144 009e 4949     		ldr	r1, .L17+44
+ 145 00a0 2046     		mov	r0, r4
+ 146 00a2 FFF7FEFF 		bl	sscanf
+ 147              	.LVL18:
+  54:commandargparser.c ****         //response
+  55:commandargparser.c ****         printf("\nTrigger slope set to %s\r\n",trigger_slope);
+ 148              		.loc 1 55 0
+ 149 00a6 3946     		mov	r1, r7
+ 150 00a8 4748     		ldr	r0, .L17+48
+ 151 00aa FFF7FEFF 		bl	printf
+ 152              	.LVL19:
+ 153 00ae 70E0     		b	.L1
+ 154              	.L7:
+  56:commandargparser.c ****     }
+  57:commandargparser.c ****     /*trigger_channel - Display waveform ch 1(default) or ch 2
+  58:commandargparser.c ****       works only in stopped state*/
+  59:commandargparser.c ****     else if(strstr(str,"set trigger_channel") != NULL){
+ 155              		.loc 1 59 0
+ 156 00b0 4649     		ldr	r1, .L17+52
+ 157 00b2 2046     		mov	r0, r4
+ 158 00b4 FFF7FEFF 		bl	strstr
+ 159              	.LVL20:
+ 160 00b8 90B1     		cbz	r0, .L8
+ 161              	.LBB3:
+  60:commandargparser.c ****         sscanf(str,"set trigger_channel %d", trigger_channel);
+ 162              		.loc 1 60 0
+ 163 00ba 454D     		ldr	r5, .L17+56
+ 164              	.LVL21:
+ 165 00bc 089A     		ldr	r2, [sp, #32]
+ 166 00be 2946     		mov	r1, r5
+ 167 00c0 2046     		mov	r0, r4
+ 168 00c2 FFF7FEFF 		bl	sscanf
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 5
+
+
+ 169              	.LVL22:
+  61:commandargparser.c ****         
+  62:commandargparser.c ****         int nutrigger_channel = (int)trigger_channel;
+ 170              		.loc 1 62 0
+ 171 00c6 02AA     		add	r2, sp, #8
+ 172 00c8 089B     		ldr	r3, [sp, #32]
+ 173 00ca 42F8043D 		str	r3, [r2, #-4]!
+  63:commandargparser.c ****         sscanf(str,"set trigger_channel %d", &nutrigger_channel);
+ 174              		.loc 1 63 0
+ 175 00ce 2946     		mov	r1, r5
+ 176 00d0 2046     		mov	r0, r4
+ 177 00d2 FFF7FEFF 		bl	sscanf
+ 178              	.LVL23:
+  64:commandargparser.c ****         //response
+  65:commandargparser.c ****         printf("\nTrigger channel set to %d\r\n",nutrigger_channel);
+ 179              		.loc 1 65 0
+ 180 00d6 0199     		ldr	r1, [sp, #4]
+ 181 00d8 3E48     		ldr	r0, .L17+60
+ 182 00da FFF7FEFF 		bl	printf
+ 183              	.LVL24:
+ 184              	.LBE3:
+ 185 00de 58E0     		b	.L1
+ 186              	.LVL25:
+ 187              	.L8:
+  66:commandargparser.c ****     }
+  67:commandargparser.c ****     /*xscale: horizontal scale of waveform - uS/div -1000 default value*/
+  68:commandargparser.c ****      else if(strstr(str,"set xscale") != NULL){
+ 188              		.loc 1 68 0
+ 189 00e0 3D49     		ldr	r1, .L17+64
+ 190 00e2 2046     		mov	r0, r4
+ 191 00e4 FFF7FEFF 		bl	strstr
+ 192              	.LVL26:
+ 193 00e8 58B3     		cbz	r0, .L9
+ 194              	.LBB4:
+  69:commandargparser.c ****         sscanf(str,"set xscale %d", xscale);
+ 195              		.loc 1 69 0
+ 196 00ea 3C4D     		ldr	r5, .L17+68
+ 197              	.LVL27:
+ 198 00ec 099A     		ldr	r2, [sp, #36]
+ 199 00ee 2946     		mov	r1, r5
+ 200 00f0 2046     		mov	r0, r4
+ 201 00f2 FFF7FEFF 		bl	sscanf
+ 202              	.LVL28:
+  70:commandargparser.c ****         
+  71:commandargparser.c ****         int nuxscale = (int)xscale;
+ 203              		.loc 1 71 0
+ 204 00f6 02AA     		add	r2, sp, #8
+ 205 00f8 099B     		ldr	r3, [sp, #36]
+ 206 00fa 42F8043D 		str	r3, [r2, #-4]!
+  72:commandargparser.c ****         sscanf(str,"set xscale %d", &nuxscale);
+ 207              		.loc 1 72 0
+ 208 00fe 2946     		mov	r1, r5
+ 209 0100 2046     		mov	r0, r4
+ 210 0102 FFF7FEFF 		bl	sscanf
+ 211              	.LVL29:
+  73:commandargparser.c ****         if(nuxscale==100||nuxscale==200||nuxscale==500||
+ 212              		.loc 1 73 0
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 6
+
+
+ 213 0106 0199     		ldr	r1, [sp, #4]
+ 214 0108 6429     		cmp	r1, #100
+ 215 010a 12D0     		beq	.L10
+ 216              		.loc 1 73 0 is_stmt 0 discriminator 1
+ 217 010c C829     		cmp	r1, #200
+ 218 010e 10D0     		beq	.L10
+ 219              		.loc 1 73 0 discriminator 2
+ 220 0110 B1F5FA7F 		cmp	r1, #500
+ 221 0114 0DD0     		beq	.L10
+ 222              		.loc 1 73 0 discriminator 3
+ 223 0116 B1F57A7F 		cmp	r1, #1000
+ 224 011a 0AD0     		beq	.L10
+  74:commandargparser.c ****             nuxscale==1000||nuxscale==2000||nuxscale==5000||nuxscale==10000)
+ 225              		.loc 1 74 0 is_stmt 1
+ 226 011c B1F5FA6F 		cmp	r1, #2000
+ 227 0120 07D0     		beq	.L10
+ 228              		.loc 1 74 0 is_stmt 0 discriminator 1
+ 229 0122 41F28833 		movw	r3, #5000
+ 230 0126 9942     		cmp	r1, r3
+ 231 0128 03D0     		beq	.L10
+ 232              		.loc 1 74 0 discriminator 2
+ 233 012a 42F21073 		movw	r3, #10000
+ 234 012e 9942     		cmp	r1, r3
+ 235 0130 03D1     		bne	.L11
+ 236              	.L10:
+  75:commandargparser.c ****         {
+  76:commandargparser.c ****             //response to puTTy
+  77:commandargparser.c ****             printf("\nSuccessful! Xscale set to %d uS/div\r\n",nuxscale);
+ 237              		.loc 1 77 0 is_stmt 1
+ 238 0132 2B48     		ldr	r0, .L17+72
+ 239 0134 FFF7FEFF 		bl	printf
+ 240              	.LVL30:
+ 241 0138 2BE0     		b	.L1
+ 242              	.L11:
+  78:commandargparser.c ****         }else{
+  79:commandargparser.c ****             printf("invalid xscale value\r\n");
+ 243              		.loc 1 79 0
+ 244 013a 2A48     		ldr	r0, .L17+76
+ 245 013c FFF7FEFF 		bl	puts
+ 246              	.LVL31:
+ 247 0140 27E0     		b	.L1
+ 248              	.LVL32:
+ 249              	.L9:
+ 250              	.LBE4:
+  80:commandargparser.c ****         }    
+  81:commandargparser.c ****     }
+  82:commandargparser.c ****     /*yscale: vertical scale of waveform - mV/div -1000 default value*/
+  83:commandargparser.c ****     else if(strstr(str,"set yscale") != NULL){
+ 251              		.loc 1 83 0
+ 252 0142 2949     		ldr	r1, .L17+80
+ 253 0144 2046     		mov	r0, r4
+ 254 0146 FFF7FEFF 		bl	strstr
+ 255              	.LVL33:
+ 256 014a 10B3     		cbz	r0, .L1
+ 257              	.LBB5:
+  84:commandargparser.c ****         sscanf(str,"set yscale %d", yscale);
+ 258              		.loc 1 84 0
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 7
+
+
+ 259 014c 274D     		ldr	r5, .L17+84
+ 260              	.LVL34:
+ 261 014e 0A9A     		ldr	r2, [sp, #40]
+ 262 0150 2946     		mov	r1, r5
+ 263 0152 2046     		mov	r0, r4
+ 264 0154 FFF7FEFF 		bl	sscanf
+ 265              	.LVL35:
+  85:commandargparser.c ****         
+  86:commandargparser.c ****         int nuyscale = (int)yscale;
+ 266              		.loc 1 86 0
+ 267 0158 02AA     		add	r2, sp, #8
+ 268 015a 0A9B     		ldr	r3, [sp, #40]
+ 269 015c 42F8043D 		str	r3, [r2, #-4]!
+  87:commandargparser.c ****         sscanf(str,"set yscale %d", &nuyscale);
+ 270              		.loc 1 87 0
+ 271 0160 2946     		mov	r1, r5
+ 272 0162 2046     		mov	r0, r4
+ 273 0164 FFF7FEFF 		bl	sscanf
+ 274              	.LVL36:
+  88:commandargparser.c ****         if(nuyscale == 500|| nuyscale==1000|| nuyscale==1500|| nuyscale==2000){
+ 275              		.loc 1 88 0
+ 276 0168 0199     		ldr	r1, [sp, #4]
+ 277 016a B1F5FA7F 		cmp	r1, #500
+ 278 016e 09D0     		beq	.L13
+ 279              		.loc 1 88 0 is_stmt 0 discriminator 1
+ 280 0170 B1F57A7F 		cmp	r1, #1000
+ 281 0174 06D0     		beq	.L13
+ 282              		.loc 1 88 0 discriminator 2
+ 283 0176 40F2DC53 		movw	r3, #1500
+ 284 017a 9942     		cmp	r1, r3
+ 285 017c 02D0     		beq	.L13
+ 286              		.loc 1 88 0 discriminator 3
+ 287 017e B1F5FA6F 		cmp	r1, #2000
+ 288 0182 03D1     		bne	.L14
+ 289              	.L13:
+  89:commandargparser.c ****             //response 
+  90:commandargparser.c ****             printf("\nSuccessful! Yscale set to %d mV/div\r\n",nuyscale);
+ 290              		.loc 1 90 0 is_stmt 1
+ 291 0184 1A48     		ldr	r0, .L17+88
+ 292 0186 FFF7FEFF 		bl	printf
+ 293              	.LVL37:
+ 294 018a 02E0     		b	.L1
+ 295              	.L14:
+  91:commandargparser.c ****         }else{
+  92:commandargparser.c ****             printf("invalid yscale value\r\n");
+ 296              		.loc 1 92 0
+ 297 018c 1948     		ldr	r0, .L17+92
+ 298 018e FFF7FEFF 		bl	puts
+ 299              	.LVL38:
+ 300              	.L1:
+ 301              	.LBE5:
+  93:commandargparser.c ****         }    
+  94:commandargparser.c ****     }
+  95:commandargparser.c **** }...
+ 302              		.loc 1 95 0
+ 303 0192 03B0     		add	sp, sp, #12
+ 304              		.cfi_def_cfa_offset 20
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 8
+
+
+ 305              		@ sp needed
+ 306 0194 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 307              	.LVL39:
+ 308              	.L18:
+ 309 0196 00BF     		.align	2
+ 310              	.L17:
+ 311 0198 00000000 		.word	.LC0
+ 312 019c 08000000 		.word	.LC1
+ 313 01a0 0C000000 		.word	.LC2
+ 314 01a4 1C000000 		.word	.LC3
+ 315 01a8 24000000 		.word	.LC4
+ 316 01ac 30000000 		.word	.LC5
+ 317 01b0 3C000000 		.word	.LC6
+ 318 01b4 58000000 		.word	.LC7
+ 319 01b8 6C000000 		.word	.LC8
+ 320 01bc 84000000 		.word	.LC9
+ 321 01c0 A4000000 		.word	.LC10
+ 322 01c4 B8000000 		.word	.LC11
+ 323 01c8 D0000000 		.word	.LC12
+ 324 01cc EC000000 		.word	.LC13
+ 325 01d0 00010000 		.word	.LC14
+ 326 01d4 18010000 		.word	.LC15
+ 327 01d8 38010000 		.word	.LC16
+ 328 01dc 44010000 		.word	.LC17
+ 329 01e0 54010000 		.word	.LC18
+ 330 01e4 7C010000 		.word	.LC19
+ 331 01e8 94010000 		.word	.LC20
+ 332 01ec A0010000 		.word	.LC21
+ 333 01f0 B0010000 		.word	.LC22
+ 334 01f4 D8010000 		.word	.LC23
+ 335              		.cfi_endproc
+ 336              	.LFE637:
+ 337              		.size	command_parser, .-command_parser
+ 338              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 339              		.align	2
+ 340              	.LC0:
+ 341 0000 73746172 		.ascii	"start\000"
+ 341      7400
+ 342 0006 0000     		.space	2
+ 343              	.LC1:
+ 344 0008 257300   		.ascii	"%s\000"
+ 345 000b 00       		.space	1
+ 346              	.LC2:
+ 347 000c 0A50726F 		.ascii	"\012Program %s\015\012\000"
+ 347      6772616D 
+ 347      2025730D 
+ 347      0A00
+ 348 001a 0000     		.space	2
+ 349              	.LC3:
+ 350 001c 73746F70 		.ascii	"stop\000"
+ 350      00
+ 351 0021 000000   		.space	3
+ 352              	.LC4:
+ 353 0024 73657420 		.ascii	"set mode\000"
+ 353      6D6F6465 
+ 353      00
+ 354 002d 000000   		.space	3
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 9
+
+
+ 355              	.LC5:
+ 356 0030 73657420 		.ascii	"set mode %s\000"
+ 356      6D6F6465 
+ 356      20257300 
+ 357              	.LC6:
+ 358 003c 0A4D6F64 		.ascii	"\012Mode set to %s running\015\012\000"
+ 358      65207365 
+ 358      7420746F 
+ 358      20257320 
+ 358      72756E6E 
+ 359 0056 0000     		.space	2
+ 360              	.LC7:
+ 361 0058 73657420 		.ascii	"set trigger_level\000"
+ 361      74726967 
+ 361      6765725F 
+ 361      6C657665 
+ 361      6C00
+ 362 006a 0000     		.space	2
+ 363              	.LC8:
+ 364 006c 73657420 		.ascii	"set trigger_level %d\000"
+ 364      74726967 
+ 364      6765725F 
+ 364      6C657665 
+ 364      6C202564 
+ 365 0081 000000   		.space	3
+ 366              	.LC9:
+ 367 0084 0A547269 		.ascii	"\012Trigger level set to %d mV\015\012\000"
+ 367      67676572 
+ 367      206C6576 
+ 367      656C2073 
+ 367      65742074 
+ 368 00a2 0000     		.space	2
+ 369              	.LC10:
+ 370 00a4 73657420 		.ascii	"set trigger_slope\000"
+ 370      74726967 
+ 370      6765725F 
+ 370      736C6F70 
+ 370      6500
+ 371 00b6 0000     		.space	2
+ 372              	.LC11:
+ 373 00b8 73657420 		.ascii	"set trigger_slope %s\000"
+ 373      74726967 
+ 373      6765725F 
+ 373      736C6F70 
+ 373      65202573 
+ 374 00cd 000000   		.space	3
+ 375              	.LC12:
+ 376 00d0 0A547269 		.ascii	"\012Trigger slope set to %s\015\012\000"
+ 376      67676572 
+ 376      20736C6F 
+ 376      70652073 
+ 376      65742074 
+ 377 00eb 00       		.space	1
+ 378              	.LC13:
+ 379 00ec 73657420 		.ascii	"set trigger_channel\000"
+ 379      74726967 
+ 379      6765725F 
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 10
+
+
+ 379      6368616E 
+ 379      6E656C00 
+ 380              	.LC14:
+ 381 0100 73657420 		.ascii	"set trigger_channel %d\000"
+ 381      74726967 
+ 381      6765725F 
+ 381      6368616E 
+ 381      6E656C20 
+ 382 0117 00       		.space	1
+ 383              	.LC15:
+ 384 0118 0A547269 		.ascii	"\012Trigger channel set to %d\015\012\000"
+ 384      67676572 
+ 384      20636861 
+ 384      6E6E656C 
+ 384      20736574 
+ 385 0135 000000   		.space	3
+ 386              	.LC16:
+ 387 0138 73657420 		.ascii	"set xscale\000"
+ 387      78736361 
+ 387      6C6500
+ 388 0143 00       		.space	1
+ 389              	.LC17:
+ 390 0144 73657420 		.ascii	"set xscale %d\000"
+ 390      78736361 
+ 390      6C652025 
+ 390      6400
+ 391 0152 0000     		.space	2
+ 392              	.LC18:
+ 393 0154 0A537563 		.ascii	"\012Successful! Xscale set to %d uS/div\015\012\000"
+ 393      63657373 
+ 393      66756C21 
+ 393      20587363 
+ 393      616C6520 
+ 394 017b 00       		.space	1
+ 395              	.LC19:
+ 396 017c 696E7661 		.ascii	"invalid xscale value\015\000"
+ 396      6C696420 
+ 396      78736361 
+ 396      6C652076 
+ 396      616C7565 
+ 397 0192 0000     		.space	2
+ 398              	.LC20:
+ 399 0194 73657420 		.ascii	"set yscale\000"
+ 399      79736361 
+ 399      6C6500
+ 400 019f 00       		.space	1
+ 401              	.LC21:
+ 402 01a0 73657420 		.ascii	"set yscale %d\000"
+ 402      79736361 
+ 402      6C652025 
+ 402      6400
+ 403 01ae 0000     		.space	2
+ 404              	.LC22:
+ 405 01b0 0A537563 		.ascii	"\012Successful! Yscale set to %d mV/div\015\012\000"
+ 405      63657373 
+ 405      66756C21 
+ 405      20597363 
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 11
+
+
+ 405      616C6520 
+ 406 01d7 00       		.space	1
+ 407              	.LC23:
+ 408 01d8 696E7661 		.ascii	"invalid yscale value\015\000"
+ 408      6C696420 
+ 408      79736361 
+ 408      6C652076 
+ 408      616C7565 
+ 409              		.text
+ 410              	.Letext0:
+ 411              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
+ 412              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4.
+ 413              		.file 4 "Generated_Source\\PSoC6\\pdl\\drivers/peripheral/device/cy_device.h"
+ 414              		.file 5 "Generated_Source\\PSoC6\\pdl\\drivers/peripheral/sar/cy_sar.h"
+ 415              		.file 6 "Generated_Source\\PSoC6\\pdl\\drivers/peripheral/scb/cy_scb_uart.h"
+ 416              		.file 7 "Generated_Source\\PSoC6/ADC_1.h"
+ 417              		.file 8 "Generated_Source\\PSoC6\\pdl\\cmsis/include/core_cm4.h"
+ 418              		.file 9 "Generated_Source\\PSoC6/UART_1.h"
+ 419              		.file 10 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4
+ 420              		.file 11 "c:\\program files (x86)\\cypress\\psoc creator\\4.3\\psoc creator\\import\\gnu\\arm\\5.4
+ 421              		.file 12 "<built-in>"
+ 422              		.section	.debug_info,"",%progbits
+ 423              	.Ldebug_info0:
+ 424 0000 890C0000 		.4byte	0xc89
+ 425 0004 0400     		.2byte	0x4
+ 426 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 427 000a 04       		.byte	0x4
+ 428 000b 01       		.uleb128 0x1
+ 429 000c BD060000 		.4byte	.LASF174
+ 430 0010 0C       		.byte	0xc
+ 431 0011 37080000 		.4byte	.LASF175
+ 432 0015 3A040000 		.4byte	.LASF176
+ 433 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 434 001d 00000000 		.4byte	0
+ 435 0021 00000000 		.4byte	.Ldebug_line0
+ 436 0025 02       		.uleb128 0x2
+ 437 0026 02       		.byte	0x2
+ 438 0027 05       		.byte	0x5
+ 439 0028 23080000 		.4byte	.LASF0
+ 440 002c 02       		.uleb128 0x2
+ 441 002d 01       		.byte	0x1
+ 442 002e 06       		.byte	0x6
+ 443 002f 8D010000 		.4byte	.LASF1
+ 444 0033 03       		.uleb128 0x3
+ 445 0034 81000000 		.4byte	.LASF3
+ 446 0038 02       		.byte	0x2
+ 447 0039 1D       		.byte	0x1d
+ 448 003a 3E000000 		.4byte	0x3e
+ 449 003e 02       		.uleb128 0x2
+ 450 003f 01       		.byte	0x1
+ 451 0040 08       		.byte	0x8
+ 452 0041 01080000 		.4byte	.LASF2
+ 453 0045 03       		.uleb128 0x3
+ 454 0046 61030000 		.4byte	.LASF4
+ 455 004a 02       		.byte	0x2
+ 456 004b 29       		.byte	0x29
+ 457 004c 25000000 		.4byte	0x25
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 12
+
+
+ 458 0050 03       		.uleb128 0x3
+ 459 0051 05090000 		.4byte	.LASF5
+ 460 0055 02       		.byte	0x2
+ 461 0056 2B       		.byte	0x2b
+ 462 0057 5B000000 		.4byte	0x5b
+ 463 005b 02       		.uleb128 0x2
+ 464 005c 02       		.byte	0x2
+ 465 005d 07       		.byte	0x7
+ 466 005e FE020000 		.4byte	.LASF6
+ 467 0062 03       		.uleb128 0x3
+ 468 0063 3D050000 		.4byte	.LASF7
+ 469 0067 02       		.byte	0x2
+ 470 0068 3F       		.byte	0x3f
+ 471 0069 6D000000 		.4byte	0x6d
+ 472 006d 02       		.uleb128 0x2
+ 473 006e 04       		.byte	0x4
+ 474 006f 05       		.byte	0x5
+ 475 0070 36020000 		.4byte	.LASF8
+ 476 0074 03       		.uleb128 0x3
+ 477 0075 3A030000 		.4byte	.LASF9
+ 478 0079 02       		.byte	0x2
+ 479 007a 41       		.byte	0x41
+ 480 007b 7F000000 		.4byte	0x7f
+ 481 007f 02       		.uleb128 0x2
+ 482 0080 04       		.byte	0x4
+ 483 0081 07       		.byte	0x7
+ 484 0082 09040000 		.4byte	.LASF10
+ 485 0086 02       		.uleb128 0x2
+ 486 0087 08       		.byte	0x8
+ 487 0088 05       		.byte	0x5
+ 488 0089 7F010000 		.4byte	.LASF11
+ 489 008d 02       		.uleb128 0x2
+ 490 008e 08       		.byte	0x8
+ 491 008f 07       		.byte	0x7
+ 492 0090 E9000000 		.4byte	.LASF12
+ 493 0094 04       		.uleb128 0x4
+ 494 0095 04       		.byte	0x4
+ 495 0096 05       		.byte	0x5
+ 496 0097 696E7400 		.ascii	"int\000"
+ 497 009b 02       		.uleb128 0x2
+ 498 009c 04       		.byte	0x4
+ 499 009d 07       		.byte	0x7
+ 500 009e CD030000 		.4byte	.LASF13
+ 501 00a2 03       		.uleb128 0x3
+ 502 00a3 2C090000 		.4byte	.LASF14
+ 503 00a7 03       		.byte	0x3
+ 504 00a8 18       		.byte	0x18
+ 505 00a9 33000000 		.4byte	0x33
+ 506 00ad 03       		.uleb128 0x3
+ 507 00ae 63010000 		.4byte	.LASF15
+ 508 00b2 03       		.byte	0x3
+ 509 00b3 20       		.byte	0x20
+ 510 00b4 45000000 		.4byte	0x45
+ 511 00b8 03       		.uleb128 0x3
+ 512 00b9 DA030000 		.4byte	.LASF16
+ 513 00bd 03       		.byte	0x3
+ 514 00be 24       		.byte	0x24
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 13
+
+
+ 515 00bf 50000000 		.4byte	0x50
+ 516 00c3 03       		.uleb128 0x3
+ 517 00c4 F9070000 		.4byte	.LASF17
+ 518 00c8 03       		.byte	0x3
+ 519 00c9 2C       		.byte	0x2c
+ 520 00ca 62000000 		.4byte	0x62
+ 521 00ce 03       		.uleb128 0x3
+ 522 00cf 97080000 		.4byte	.LASF18
+ 523 00d3 03       		.byte	0x3
+ 524 00d4 30       		.byte	0x30
+ 525 00d5 74000000 		.4byte	0x74
+ 526 00d9 02       		.uleb128 0x2
+ 527 00da 04       		.byte	0x4
+ 528 00db 07       		.byte	0x7
+ 529 00dc D8050000 		.4byte	.LASF19
+ 530 00e0 05       		.uleb128 0x5
+ 531 00e1 CE000000 		.4byte	0xce
+ 532 00e5 02       		.uleb128 0x2
+ 533 00e6 08       		.byte	0x8
+ 534 00e7 04       		.byte	0x4
+ 535 00e8 D5080000 		.4byte	.LASF20
+ 536 00ec 06       		.uleb128 0x6
+ 537 00ed B8       		.byte	0xb8
+ 538 00ee 04       		.byte	0x4
+ 539 00ef 34       		.byte	0x34
+ 540 00f0 FD040000 		.4byte	0x4fd
+ 541 00f4 07       		.uleb128 0x7
+ 542 00f5 C4000000 		.4byte	.LASF21
+ 543 00f9 04       		.byte	0x4
+ 544 00fa 37       		.byte	0x37
+ 545 00fb CE000000 		.4byte	0xce
+ 546 00ff 00       		.byte	0
+ 547 0100 07       		.uleb128 0x7
+ 548 0101 2F030000 		.4byte	.LASF22
+ 549 0105 04       		.byte	0x4
+ 550 0106 38       		.byte	0x38
+ 551 0107 CE000000 		.4byte	0xce
+ 552 010b 04       		.byte	0x4
+ 553 010c 07       		.uleb128 0x7
+ 554 010d 8D020000 		.4byte	.LASF23
+ 555 0111 04       		.byte	0x4
+ 556 0112 39       		.byte	0x39
+ 557 0113 CE000000 		.4byte	0xce
+ 558 0117 08       		.byte	0x8
+ 559 0118 07       		.uleb128 0x7
+ 560 0119 D2070000 		.4byte	.LASF24
+ 561 011d 04       		.byte	0x4
+ 562 011e 3A       		.byte	0x3a
+ 563 011f CE000000 		.4byte	0xce
+ 564 0123 0C       		.byte	0xc
+ 565 0124 07       		.uleb128 0x7
+ 566 0125 DC010000 		.4byte	.LASF25
+ 567 0129 04       		.byte	0x4
+ 568 012a 3B       		.byte	0x3b
+ 569 012b CE000000 		.4byte	0xce
+ 570 012f 10       		.byte	0x10
+ 571 0130 07       		.uleb128 0x7
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 14
+
+
+ 572 0131 14020000 		.4byte	.LASF26
+ 573 0135 04       		.byte	0x4
+ 574 0136 3C       		.byte	0x3c
+ 575 0137 CE000000 		.4byte	0xce
+ 576 013b 14       		.byte	0x14
+ 577 013c 07       		.uleb128 0x7
+ 578 013d 89040000 		.4byte	.LASF27
+ 579 0141 04       		.byte	0x4
+ 580 0142 3D       		.byte	0x3d
+ 581 0143 CE000000 		.4byte	0xce
+ 582 0147 18       		.byte	0x18
+ 583 0148 07       		.uleb128 0x7
+ 584 0149 6A000000 		.4byte	.LASF28
+ 585 014d 04       		.byte	0x4
+ 586 014e 3E       		.byte	0x3e
+ 587 014f CE000000 		.4byte	0xce
+ 588 0153 1C       		.byte	0x1c
+ 589 0154 07       		.uleb128 0x7
+ 590 0155 A70A0000 		.4byte	.LASF29
+ 591 0159 04       		.byte	0x4
+ 592 015a 3F       		.byte	0x3f
+ 593 015b CE000000 		.4byte	0xce
+ 594 015f 20       		.byte	0x20
+ 595 0160 07       		.uleb128 0x7
+ 596 0161 97060000 		.4byte	.LASF30
+ 597 0165 04       		.byte	0x4
+ 598 0166 40       		.byte	0x40
+ 599 0167 CE000000 		.4byte	0xce
+ 600 016b 24       		.byte	0x24
+ 601 016c 07       		.uleb128 0x7
+ 602 016d 95050000 		.4byte	.LASF31
+ 603 0171 04       		.byte	0x4
+ 604 0172 43       		.byte	0x43
+ 605 0173 A2000000 		.4byte	0xa2
+ 606 0177 28       		.byte	0x28
+ 607 0178 07       		.uleb128 0x7
+ 608 0179 11030000 		.4byte	.LASF32
+ 609 017d 04       		.byte	0x4
+ 610 017e 44       		.byte	0x44
+ 611 017f A2000000 		.4byte	0xa2
+ 612 0183 29       		.byte	0x29
+ 613 0184 07       		.uleb128 0x7
+ 614 0185 9D0A0000 		.4byte	.LASF33
+ 615 0189 04       		.byte	0x4
+ 616 018a 45       		.byte	0x45
+ 617 018b A2000000 		.4byte	0xa2
+ 618 018f 2A       		.byte	0x2a
+ 619 0190 07       		.uleb128 0x7
+ 620 0191 89060000 		.4byte	.LASF34
+ 621 0195 04       		.byte	0x4
+ 622 0196 46       		.byte	0x46
+ 623 0197 A2000000 		.4byte	0xa2
+ 624 019b 2B       		.byte	0x2b
+ 625 019c 07       		.uleb128 0x7
+ 626 019d F5040000 		.4byte	.LASF35
+ 627 01a1 04       		.byte	0x4
+ 628 01a2 47       		.byte	0x47
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 15
+
+
+ 629 01a3 A2000000 		.4byte	0xa2
+ 630 01a7 2C       		.byte	0x2c
+ 631 01a8 07       		.uleb128 0x7
+ 632 01a9 34090000 		.4byte	.LASF36
+ 633 01ad 04       		.byte	0x4
+ 634 01ae 48       		.byte	0x48
+ 635 01af A2000000 		.4byte	0xa2
+ 636 01b3 2D       		.byte	0x2d
+ 637 01b4 07       		.uleb128 0x7
+ 638 01b5 E5010000 		.4byte	.LASF37
+ 639 01b9 04       		.byte	0x4
+ 640 01ba 49       		.byte	0x49
+ 641 01bb A2000000 		.4byte	0xa2
+ 642 01bf 2E       		.byte	0x2e
+ 643 01c0 07       		.uleb128 0x7
+ 644 01c1 A7050000 		.4byte	.LASF38
+ 645 01c5 04       		.byte	0x4
+ 646 01c6 4A       		.byte	0x4a
+ 647 01c7 A2000000 		.4byte	0xa2
+ 648 01cb 2F       		.byte	0x2f
+ 649 01cc 07       		.uleb128 0x7
+ 650 01cd E6080000 		.4byte	.LASF39
+ 651 01d1 04       		.byte	0x4
+ 652 01d2 4B       		.byte	0x4b
+ 653 01d3 A2000000 		.4byte	0xa2
+ 654 01d7 30       		.byte	0x30
+ 655 01d8 07       		.uleb128 0x7
+ 656 01d9 7E040000 		.4byte	.LASF40
+ 657 01dd 04       		.byte	0x4
+ 658 01de 4E       		.byte	0x4e
+ 659 01df A2000000 		.4byte	0xa2
+ 660 01e3 31       		.byte	0x31
+ 661 01e4 07       		.uleb128 0x7
+ 662 01e5 73000000 		.4byte	.LASF41
+ 663 01e9 04       		.byte	0x4
+ 664 01ea 4F       		.byte	0x4f
+ 665 01eb A2000000 		.4byte	0xa2
+ 666 01ef 32       		.byte	0x32
+ 667 01f0 07       		.uleb128 0x7
+ 668 01f1 B2030000 		.4byte	.LASF42
+ 669 01f5 04       		.byte	0x4
+ 670 01f6 50       		.byte	0x50
+ 671 01f7 A2000000 		.4byte	0xa2
+ 672 01fb 33       		.byte	0x33
+ 673 01fc 07       		.uleb128 0x7
+ 674 01fd FE050000 		.4byte	.LASF43
+ 675 0201 04       		.byte	0x4
+ 676 0202 51       		.byte	0x51
+ 677 0203 A2000000 		.4byte	0xa2
+ 678 0207 34       		.byte	0x34
+ 679 0208 07       		.uleb128 0x7
+ 680 0209 88090000 		.4byte	.LASF44
+ 681 020d 04       		.byte	0x4
+ 682 020e 52       		.byte	0x52
+ 683 020f AD000000 		.4byte	0xad
+ 684 0213 36       		.byte	0x36
+ 685 0214 07       		.uleb128 0x7
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 16
+
+
+ 686 0215 BF020000 		.4byte	.LASF45
+ 687 0219 04       		.byte	0x4
+ 688 021a 53       		.byte	0x53
+ 689 021b AD000000 		.4byte	0xad
+ 690 021f 38       		.byte	0x38
+ 691 0220 07       		.uleb128 0x7
+ 692 0221 D8090000 		.4byte	.LASF46
+ 693 0225 04       		.byte	0x4
+ 694 0226 54       		.byte	0x54
+ 695 0227 AD000000 		.4byte	0xad
+ 696 022b 3A       		.byte	0x3a
+ 697 022c 07       		.uleb128 0x7
+ 698 022d 05020000 		.4byte	.LASF47
+ 699 0231 04       		.byte	0x4
+ 700 0232 55       		.byte	0x55
+ 701 0233 A2000000 		.4byte	0xa2
+ 702 0237 3C       		.byte	0x3c
+ 703 0238 07       		.uleb128 0x7
+ 704 0239 E6020000 		.4byte	.LASF48
+ 705 023d 04       		.byte	0x4
+ 706 023e 56       		.byte	0x56
+ 707 023f A2000000 		.4byte	0xa2
+ 708 0243 3D       		.byte	0x3d
+ 709 0244 07       		.uleb128 0x7
+ 710 0245 67080000 		.4byte	.LASF49
+ 711 0249 04       		.byte	0x4
+ 712 024a 57       		.byte	0x57
+ 713 024b A2000000 		.4byte	0xa2
+ 714 024f 3E       		.byte	0x3e
+ 715 0250 07       		.uleb128 0x7
+ 716 0251 5E000000 		.4byte	.LASF50
+ 717 0255 04       		.byte	0x4
+ 718 0256 58       		.byte	0x58
+ 719 0257 A2000000 		.4byte	0xa2
+ 720 025b 3F       		.byte	0x3f
+ 721 025c 07       		.uleb128 0x7
+ 722 025d A2060000 		.4byte	.LASF51
+ 723 0261 04       		.byte	0x4
+ 724 0262 59       		.byte	0x59
+ 725 0263 A2000000 		.4byte	0xa2
+ 726 0267 40       		.byte	0x40
+ 727 0268 07       		.uleb128 0x7
+ 728 0269 45030000 		.4byte	.LASF52
+ 729 026d 04       		.byte	0x4
+ 730 026e 5A       		.byte	0x5a
+ 731 026f A2000000 		.4byte	0xa2
+ 732 0273 41       		.byte	0x41
+ 733 0274 07       		.uleb128 0x7
+ 734 0275 47050000 		.4byte	.LASF53
+ 735 0279 04       		.byte	0x4
+ 736 027a 5B       		.byte	0x5b
+ 737 027b A2000000 		.4byte	0xa2
+ 738 027f 42       		.byte	0x42
+ 739 0280 07       		.uleb128 0x7
+ 740 0281 74030000 		.4byte	.LASF54
+ 741 0285 04       		.byte	0x4
+ 742 0286 5C       		.byte	0x5c
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 17
+
+
+ 743 0287 A2000000 		.4byte	0xa2
+ 744 028b 43       		.byte	0x43
+ 745 028c 07       		.uleb128 0x7
+ 746 028d 96020000 		.4byte	.LASF55
+ 747 0291 04       		.byte	0x4
+ 748 0292 5D       		.byte	0x5d
+ 749 0293 A2000000 		.4byte	0xa2
+ 750 0297 44       		.byte	0x44
+ 751 0298 07       		.uleb128 0x7
+ 752 0299 07000000 		.4byte	.LASF56
+ 753 029d 04       		.byte	0x4
+ 754 029e 5E       		.byte	0x5e
+ 755 029f CE000000 		.4byte	0xce
+ 756 02a3 48       		.byte	0x48
+ 757 02a4 07       		.uleb128 0x7
+ 758 02a5 70020000 		.4byte	.LASF57
+ 759 02a9 04       		.byte	0x4
+ 760 02aa 5F       		.byte	0x5f
+ 761 02ab CE000000 		.4byte	0xce
+ 762 02af 4C       		.byte	0x4c
+ 763 02b0 07       		.uleb128 0x7
+ 764 02b1 DD0A0000 		.4byte	.LASF58
+ 765 02b5 04       		.byte	0x4
+ 766 02b6 60       		.byte	0x60
+ 767 02b7 A2000000 		.4byte	0xa2
+ 768 02bb 50       		.byte	0x50
+ 769 02bc 07       		.uleb128 0x7
+ 770 02bd 3D010000 		.4byte	.LASF59
+ 771 02c1 04       		.byte	0x4
+ 772 02c2 61       		.byte	0x61
+ 773 02c3 A2000000 		.4byte	0xa2
+ 774 02c7 51       		.byte	0x51
+ 775 02c8 07       		.uleb128 0x7
+ 776 02c9 ED090000 		.4byte	.LASF60
+ 777 02cd 04       		.byte	0x4
+ 778 02ce 62       		.byte	0x62
+ 779 02cf A2000000 		.4byte	0xa2
+ 780 02d3 52       		.byte	0x52
+ 781 02d4 07       		.uleb128 0x7
+ 782 02d5 41090000 		.4byte	.LASF61
+ 783 02d9 04       		.byte	0x4
+ 784 02da 63       		.byte	0x63
+ 785 02db A2000000 		.4byte	0xa2
+ 786 02df 53       		.byte	0x53
+ 787 02e0 07       		.uleb128 0x7
+ 788 02e1 75080000 		.4byte	.LASF62
+ 789 02e5 04       		.byte	0x4
+ 790 02e6 64       		.byte	0x64
+ 791 02e7 A2000000 		.4byte	0xa2
+ 792 02eb 54       		.byte	0x54
+ 793 02ec 07       		.uleb128 0x7
+ 794 02ed 4F010000 		.4byte	.LASF63
+ 795 02f1 04       		.byte	0x4
+ 796 02f2 65       		.byte	0x65
+ 797 02f3 A2000000 		.4byte	0xa2
+ 798 02f7 55       		.byte	0x55
+ 799 02f8 07       		.uleb128 0x7
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 18
+
+
+ 800 02f9 F5030000 		.4byte	.LASF64
+ 801 02fd 04       		.byte	0x4
+ 802 02fe 66       		.byte	0x66
+ 803 02ff A2000000 		.4byte	0xa2
+ 804 0303 56       		.byte	0x56
+ 805 0304 07       		.uleb128 0x7
+ 806 0305 92040000 		.4byte	.LASF65
+ 807 0309 04       		.byte	0x4
+ 808 030a 67       		.byte	0x67
+ 809 030b A2000000 		.4byte	0xa2
+ 810 030f 57       		.byte	0x57
+ 811 0310 07       		.uleb128 0x7
+ 812 0311 23000000 		.4byte	.LASF66
+ 813 0315 04       		.byte	0x4
+ 814 0316 68       		.byte	0x68
+ 815 0317 A2000000 		.4byte	0xa2
+ 816 031b 58       		.byte	0x58
+ 817 031c 07       		.uleb128 0x7
+ 818 031d 0F080000 		.4byte	.LASF67
+ 819 0321 04       		.byte	0x4
+ 820 0322 69       		.byte	0x69
+ 821 0323 A2000000 		.4byte	0xa2
+ 822 0327 59       		.byte	0x59
+ 823 0328 07       		.uleb128 0x7
+ 824 0329 E1050000 		.4byte	.LASF68
+ 825 032d 04       		.byte	0x4
+ 826 032e 6E       		.byte	0x6e
+ 827 032f B8000000 		.4byte	0xb8
+ 828 0333 5A       		.byte	0x5a
+ 829 0334 07       		.uleb128 0x7
+ 830 0335 71090000 		.4byte	.LASF69
+ 831 0339 04       		.byte	0x4
+ 832 033a 6F       		.byte	0x6f
+ 833 033b B8000000 		.4byte	0xb8
+ 834 033f 5C       		.byte	0x5c
+ 835 0340 07       		.uleb128 0x7
+ 836 0341 CE000000 		.4byte	.LASF70
+ 837 0345 04       		.byte	0x4
+ 838 0346 70       		.byte	0x70
+ 839 0347 A2000000 		.4byte	0xa2
+ 840 034b 5E       		.byte	0x5e
+ 841 034c 07       		.uleb128 0x7
+ 842 034d A4070000 		.4byte	.LASF71
+ 843 0351 04       		.byte	0x4
+ 844 0352 71       		.byte	0x71
+ 845 0353 A2000000 		.4byte	0xa2
+ 846 0357 5F       		.byte	0x5f
+ 847 0358 07       		.uleb128 0x7
+ 848 0359 5D060000 		.4byte	.LASF72
+ 849 035d 04       		.byte	0x4
+ 850 035e 72       		.byte	0x72
+ 851 035f A2000000 		.4byte	0xa2
+ 852 0363 60       		.byte	0x60
+ 853 0364 07       		.uleb128 0x7
+ 854 0365 7D070000 		.4byte	.LASF73
+ 855 0369 04       		.byte	0x4
+ 856 036a 73       		.byte	0x73
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 19
+
+
+ 857 036b CE000000 		.4byte	0xce
+ 858 036f 64       		.byte	0x64
+ 859 0370 07       		.uleb128 0x7
+ 860 0371 00010000 		.4byte	.LASF74
+ 861 0375 04       		.byte	0x4
+ 862 0376 76       		.byte	0x76
+ 863 0377 B8000000 		.4byte	0xb8
+ 864 037b 68       		.byte	0x68
+ 865 037c 07       		.uleb128 0x7
+ 866 037d E3030000 		.4byte	.LASF75
+ 867 0381 04       		.byte	0x4
+ 868 0382 77       		.byte	0x77
+ 869 0383 B8000000 		.4byte	0xb8
+ 870 0387 6A       		.byte	0x6a
+ 871 0388 07       		.uleb128 0x7
+ 872 0389 A6040000 		.4byte	.LASF76
+ 873 038d 04       		.byte	0x4
+ 874 038e 78       		.byte	0x78
+ 875 038f B8000000 		.4byte	0xb8
+ 876 0393 6C       		.byte	0x6c
+ 877 0394 07       		.uleb128 0x7
+ 878 0395 E8040000 		.4byte	.LASF77
+ 879 0399 04       		.byte	0x4
+ 880 039a 79       		.byte	0x79
+ 881 039b B8000000 		.4byte	0xb8
+ 882 039f 6E       		.byte	0x6e
+ 883 03a0 07       		.uleb128 0x7
+ 884 03a1 53080000 		.4byte	.LASF78
+ 885 03a5 04       		.byte	0x4
+ 886 03a6 7B       		.byte	0x7b
+ 887 03a7 A2000000 		.4byte	0xa2
+ 888 03ab 70       		.byte	0x70
+ 889 03ac 07       		.uleb128 0x7
+ 890 03ad 99010000 		.4byte	.LASF79
+ 891 03b1 04       		.byte	0x4
+ 892 03b2 7C       		.byte	0x7c
+ 893 03b3 A2000000 		.4byte	0xa2
+ 894 03b7 71       		.byte	0x71
+ 895 03b8 07       		.uleb128 0x7
+ 896 03b9 AF0A0000 		.4byte	.LASF80
+ 897 03bd 04       		.byte	0x4
+ 898 03be 7D       		.byte	0x7d
+ 899 03bf A2000000 		.4byte	0xa2
+ 900 03c3 72       		.byte	0x72
+ 901 03c4 07       		.uleb128 0x7
+ 902 03c5 1C060000 		.4byte	.LASF81
+ 903 03c9 04       		.byte	0x4
+ 904 03ca 7E       		.byte	0x7e
+ 905 03cb A2000000 		.4byte	0xa2
+ 906 03cf 73       		.byte	0x73
+ 907 03d0 07       		.uleb128 0x7
+ 908 03d1 85080000 		.4byte	.LASF82
+ 909 03d5 04       		.byte	0x4
+ 910 03d6 80       		.byte	0x80
+ 911 03d7 B8000000 		.4byte	0xb8
+ 912 03db 74       		.byte	0x74
+ 913 03dc 07       		.uleb128 0x7
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 20
+
+
+ 914 03dd 10090000 		.4byte	.LASF83
+ 915 03e1 04       		.byte	0x4
+ 916 03e2 81       		.byte	0x81
+ 917 03e3 B8000000 		.4byte	0xb8
+ 918 03e7 76       		.byte	0x76
+ 919 03e8 07       		.uleb128 0x7
+ 920 03e9 D1020000 		.4byte	.LASF84
+ 921 03ed 04       		.byte	0x4
+ 922 03ee 82       		.byte	0x82
+ 923 03ef B8000000 		.4byte	0xb8
+ 924 03f3 78       		.byte	0x78
+ 925 03f4 07       		.uleb128 0x7
+ 926 03f5 92000000 		.4byte	.LASF85
+ 927 03f9 04       		.byte	0x4
+ 928 03fa 83       		.byte	0x83
+ 929 03fb B8000000 		.4byte	0xb8
+ 930 03ff 7A       		.byte	0x7a
+ 931 0400 07       		.uleb128 0x7
+ 932 0401 310A0000 		.4byte	.LASF86
+ 933 0405 04       		.byte	0x4
+ 934 0406 86       		.byte	0x86
+ 935 0407 A2000000 		.4byte	0xa2
+ 936 040b 7C       		.byte	0x7c
+ 937 040c 07       		.uleb128 0x7
+ 938 040d 95090000 		.4byte	.LASF87
+ 939 0411 04       		.byte	0x4
+ 940 0412 87       		.byte	0x87
+ 941 0413 A2000000 		.4byte	0xa2
+ 942 0417 7D       		.byte	0x7d
+ 943 0418 07       		.uleb128 0x7
+ 944 0419 37000000 		.4byte	.LASF88
+ 945 041d 04       		.byte	0x4
+ 946 041e 88       		.byte	0x88
+ 947 041f A2000000 		.4byte	0xa2
+ 948 0423 7E       		.byte	0x7e
+ 949 0424 07       		.uleb128 0x7
+ 950 0425 4E020000 		.4byte	.LASF89
+ 951 0429 04       		.byte	0x4
+ 952 042a 89       		.byte	0x89
+ 953 042b A2000000 		.4byte	0xa2
+ 954 042f 7F       		.byte	0x7f
+ 955 0430 07       		.uleb128 0x7
+ 956 0431 9E030000 		.4byte	.LASF90
+ 957 0435 04       		.byte	0x4
+ 958 0436 8A       		.byte	0x8a
+ 959 0437 A2000000 		.4byte	0xa2
+ 960 043b 80       		.byte	0x80
+ 961 043c 07       		.uleb128 0x7
+ 962 043d 7E050000 		.4byte	.LASF91
+ 963 0441 04       		.byte	0x4
+ 964 0442 8D       		.byte	0x8d
+ 965 0443 CE000000 		.4byte	0xce
+ 966 0447 84       		.byte	0x84
+ 967 0448 07       		.uleb128 0x7
+ 968 0449 A7000000 		.4byte	.LASF92
+ 969 044d 04       		.byte	0x4
+ 970 044e 8E       		.byte	0x8e
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 21
+
+
+ 971 044f CE000000 		.4byte	0xce
+ 972 0453 88       		.byte	0x88
+ 973 0454 07       		.uleb128 0x7
+ 974 0455 1C0A0000 		.4byte	.LASF93
+ 975 0459 04       		.byte	0x4
+ 976 045a 8F       		.byte	0x8f
+ 977 045b CE000000 		.4byte	0xce
+ 978 045f 8C       		.byte	0x8c
+ 979 0460 07       		.uleb128 0x7
+ 980 0461 B3050000 		.4byte	.LASF94
+ 981 0465 04       		.byte	0x4
+ 982 0466 90       		.byte	0x90
+ 983 0467 CE000000 		.4byte	0xce
+ 984 046b 90       		.byte	0x90
+ 985 046c 07       		.uleb128 0x7
+ 986 046d 7F030000 		.4byte	.LASF95
+ 987 0471 04       		.byte	0x4
+ 988 0472 91       		.byte	0x91
+ 989 0473 CE000000 		.4byte	0xce
+ 990 0477 94       		.byte	0x94
+ 991 0478 07       		.uleb128 0x7
+ 992 0479 61050000 		.4byte	.LASF96
+ 993 047d 04       		.byte	0x4
+ 994 047e 92       		.byte	0x92
+ 995 047f CE000000 		.4byte	0xce
+ 996 0483 98       		.byte	0x98
+ 997 0484 07       		.uleb128 0x7
+ 998 0485 6E0A0000 		.4byte	.LASF97
+ 999 0489 04       		.byte	0x4
+ 1000 048a 93       		.byte	0x93
+ 1001 048b CE000000 		.4byte	0xce
+ 1002 048f 9C       		.byte	0x9c
+ 1003 0490 07       		.uleb128 0x7
+ 1004 0491 1A010000 		.4byte	.LASF98
+ 1005 0495 04       		.byte	0x4
+ 1006 0496 94       		.byte	0x94
+ 1007 0497 CE000000 		.4byte	0xce
+ 1008 049b A0       		.byte	0xa0
+ 1009 049c 07       		.uleb128 0x7
+ 1010 049d F0010000 		.4byte	.LASF99
+ 1011 04a1 04       		.byte	0x4
+ 1012 04a2 95       		.byte	0x95
+ 1013 04a3 B8000000 		.4byte	0xb8
+ 1014 04a7 A4       		.byte	0xa4
+ 1015 04a8 07       		.uleb128 0x7
+ 1016 04a9 B4080000 		.4byte	.LASF100
+ 1017 04ad 04       		.byte	0x4
+ 1018 04ae 96       		.byte	0x96
+ 1019 04af B8000000 		.4byte	0xb8
+ 1020 04b3 A6       		.byte	0xa6
+ 1021 04b4 07       		.uleb128 0x7
+ 1022 04b5 98070000 		.4byte	.LASF101
+ 1023 04b9 04       		.byte	0x4
+ 1024 04ba 97       		.byte	0x97
+ 1025 04bb B8000000 		.4byte	0xb8
+ 1026 04bf A8       		.byte	0xa8
+ 1027 04c0 07       		.uleb128 0x7
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 22
+
+
+ 1028 04c1 F7080000 		.4byte	.LASF102
+ 1029 04c5 04       		.byte	0x4
+ 1030 04c6 98       		.byte	0x98
+ 1031 04c7 B8000000 		.4byte	0xb8
+ 1032 04cb AA       		.byte	0xaa
+ 1033 04cc 07       		.uleb128 0x7
+ 1034 04cd B5040000 		.4byte	.LASF103
+ 1035 04d1 04       		.byte	0x4
+ 1036 04d2 99       		.byte	0x99
+ 1037 04d3 B8000000 		.4byte	0xb8
+ 1038 04d7 AC       		.byte	0xac
+ 1039 04d8 07       		.uleb128 0x7
+ 1040 04d9 33060000 		.4byte	.LASF104
+ 1041 04dd 04       		.byte	0x4
+ 1042 04de 9A       		.byte	0x9a
+ 1043 04df B8000000 		.4byte	0xb8
+ 1044 04e3 AE       		.byte	0xae
+ 1045 04e4 07       		.uleb128 0x7
+ 1046 04e5 7A090000 		.4byte	.LASF105
+ 1047 04e9 04       		.byte	0x4
+ 1048 04ea 9D       		.byte	0x9d
+ 1049 04eb B8000000 		.4byte	0xb8
+ 1050 04ef B0       		.byte	0xb0
+ 1051 04f0 07       		.uleb128 0x7
+ 1052 04f1 4A000000 		.4byte	.LASF106
+ 1053 04f5 04       		.byte	0x4
+ 1054 04f6 9E       		.byte	0x9e
+ 1055 04f7 CE000000 		.4byte	0xce
+ 1056 04fb B4       		.byte	0xb4
+ 1057 04fc 00       		.byte	0
+ 1058 04fd 03       		.uleb128 0x3
+ 1059 04fe 16050000 		.4byte	.LASF107
+ 1060 0502 04       		.byte	0x4
+ 1061 0503 9F       		.byte	0x9f
+ 1062 0504 EC000000 		.4byte	0xec
+ 1063 0508 02       		.uleb128 0x2
+ 1064 0509 01       		.byte	0x1
+ 1065 050a 08       		.byte	0x8
+ 1066 050b E1080000 		.4byte	.LASF108
+ 1067 050f 02       		.uleb128 0x2
+ 1068 0510 04       		.byte	0x4
+ 1069 0511 04       		.byte	0x4
+ 1070 0512 77070000 		.4byte	.LASF109
+ 1071 0516 02       		.uleb128 0x2
+ 1072 0517 08       		.byte	0x8
+ 1073 0518 04       		.byte	0x4
+ 1074 0519 CA020000 		.4byte	.LASF110
+ 1075 051d 08       		.uleb128 0x8
+ 1076 051e 04       		.byte	0x4
+ 1077 051f 02       		.uleb128 0x2
+ 1078 0520 01       		.byte	0x1
+ 1079 0521 02       		.byte	0x2
+ 1080 0522 F3070000 		.4byte	.LASF111
+ 1081 0526 09       		.uleb128 0x9
+ 1082 0527 01       		.byte	0x1
+ 1083 0528 3E000000 		.4byte	0x3e
+ 1084 052c 05       		.byte	0x5
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 23
+
+
+ 1085 052d 1304     		.2byte	0x413
+ 1086 052f 4C050000 		.4byte	0x54c
+ 1087 0533 0A       		.uleb128 0xa
+ 1088 0534 1E020000 		.4byte	.LASF112
+ 1089 0538 00       		.byte	0
+ 1090 0539 0A       		.uleb128 0xa
+ 1091 053a DA070000 		.4byte	.LASF113
+ 1092 053e 01       		.byte	0x1
+ 1093 053f 0A       		.uleb128 0xa
+ 1094 0540 A7020000 		.4byte	.LASF114
+ 1095 0544 02       		.byte	0x2
+ 1096 0545 0A       		.uleb128 0xa
+ 1097 0546 460A0000 		.4byte	.LASF115
+ 1098 054a 03       		.byte	0x3
+ 1099 054b 00       		.byte	0
+ 1100 054c 0B       		.uleb128 0xb
+ 1101 054d AE010000 		.4byte	.LASF116
+ 1102 0551 05       		.byte	0x5
+ 1103 0552 1804     		.2byte	0x418
+ 1104 0554 26050000 		.4byte	0x526
+ 1105 0558 0C       		.uleb128 0xc
+ 1106 0559 78       		.byte	0x78
+ 1107 055a 05       		.byte	0x5
+ 1108 055b 0205     		.2byte	0x502
+ 1109 055d 25060000 		.4byte	0x625
+ 1110 0561 0D       		.uleb128 0xd
+ 1111 0562 53090000 		.4byte	.LASF117
+ 1112 0566 05       		.byte	0x5
+ 1113 0567 0405     		.2byte	0x504
+ 1114 0569 CE000000 		.4byte	0xce
+ 1115 056d 00       		.byte	0
+ 1116 056e 0D       		.uleb128 0xd
+ 1117 056f FD090000 		.4byte	.LASF118
+ 1118 0573 05       		.byte	0x5
+ 1119 0574 0505     		.2byte	0x505
+ 1120 0576 CE000000 		.4byte	0xce
+ 1121 057a 04       		.byte	0x4
+ 1122 057b 0D       		.uleb128 0xd
+ 1123 057c F1020000 		.4byte	.LASF119
+ 1124 0580 05       		.byte	0x5
+ 1125 0581 0605     		.2byte	0x506
+ 1126 0583 CE000000 		.4byte	0xce
+ 1127 0587 08       		.byte	0x8
+ 1128 0588 0D       		.uleb128 0xd
+ 1129 0589 0F060000 		.4byte	.LASF120
+ 1130 058d 05       		.byte	0x5
+ 1131 058e 0705     		.2byte	0x507
+ 1132 0590 CE000000 		.4byte	0xce
+ 1133 0594 0C       		.byte	0xc
+ 1134 0595 0D       		.uleb128 0xd
+ 1135 0596 D4040000 		.4byte	.LASF121
+ 1136 059a 05       		.byte	0x5
+ 1137 059b 0805     		.2byte	0x508
+ 1138 059d CE000000 		.4byte	0xce
+ 1139 05a1 10       		.byte	0x10
+ 1140 05a2 0D       		.uleb128 0xd
+ 1141 05a3 CE090000 		.4byte	.LASF122
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 24
+
+
+ 1142 05a7 05       		.byte	0x5
+ 1143 05a8 0905     		.2byte	0x509
+ 1144 05aa 4C050000 		.4byte	0x54c
+ 1145 05ae 14       		.byte	0x14
+ 1146 05af 0D       		.uleb128 0xd
+ 1147 05b0 CB070000 		.4byte	.LASF123
+ 1148 05b4 05       		.byte	0x5
+ 1149 05b5 0A05     		.2byte	0x50a
+ 1150 05b7 CE000000 		.4byte	0xce
+ 1151 05bb 18       		.byte	0x18
+ 1152 05bc 0D       		.uleb128 0xd
+ 1153 05bd 26050000 		.4byte	.LASF124
+ 1154 05c1 05       		.byte	0x5
+ 1155 05c2 0B05     		.2byte	0x50b
+ 1156 05c4 25060000 		.4byte	0x625
+ 1157 05c8 1C       		.byte	0x1c
+ 1158 05c9 0D       		.uleb128 0xd
+ 1159 05ca 4A080000 		.4byte	.LASF125
+ 1160 05ce 05       		.byte	0x5
+ 1161 05cf 0C05     		.2byte	0x50c
+ 1162 05d1 CE000000 		.4byte	0xce
+ 1163 05d5 5C       		.byte	0x5c
+ 1164 05d6 0D       		.uleb128 0xd
+ 1165 05d7 DD000000 		.4byte	.LASF126
+ 1166 05db 05       		.byte	0x5
+ 1167 05dc 0D05     		.2byte	0x50d
+ 1168 05de CE000000 		.4byte	0xce
+ 1169 05e2 60       		.byte	0x60
+ 1170 05e3 0D       		.uleb128 0xd
+ 1171 05e4 AF060000 		.4byte	.LASF127
+ 1172 05e8 05       		.byte	0x5
+ 1173 05e9 0E05     		.2byte	0x50e
+ 1174 05eb CE000000 		.4byte	0xce
+ 1175 05ef 64       		.byte	0x64
+ 1176 05f0 0D       		.uleb128 0xd
+ 1177 05f1 2D080000 		.4byte	.LASF128
+ 1178 05f5 05       		.byte	0x5
+ 1179 05f6 0F05     		.2byte	0x50f
+ 1180 05f8 CE000000 		.4byte	0xce
+ 1181 05fc 68       		.byte	0x68
+ 1182 05fd 0D       		.uleb128 0xd
+ 1183 05fe 8D0A0000 		.4byte	.LASF129
+ 1184 0602 05       		.byte	0x5
+ 1185 0603 1005     		.2byte	0x510
+ 1186 0605 CE000000 		.4byte	0xce
+ 1187 0609 6C       		.byte	0x6c
+ 1188 060a 0D       		.uleb128 0xd
+ 1189 060b 4F060000 		.4byte	.LASF130
+ 1190 060f 05       		.byte	0x5
+ 1191 0610 1105     		.2byte	0x511
+ 1192 0612 1F050000 		.4byte	0x51f
+ 1193 0616 70       		.byte	0x70
+ 1194 0617 0D       		.uleb128 0xd
+ 1195 0618 C9080000 		.4byte	.LASF131
+ 1196 061c 05       		.byte	0x5
+ 1197 061d 1205     		.2byte	0x512
+ 1198 061f CE000000 		.4byte	0xce
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 25
+
+
+ 1199 0623 74       		.byte	0x74
+ 1200 0624 00       		.byte	0
+ 1201 0625 0E       		.uleb128 0xe
+ 1202 0626 CE000000 		.4byte	0xce
+ 1203 062a 35060000 		.4byte	0x635
+ 1204 062e 0F       		.uleb128 0xf
+ 1205 062f D9000000 		.4byte	0xd9
+ 1206 0633 0F       		.byte	0xf
+ 1207 0634 00       		.byte	0
+ 1208 0635 0B       		.uleb128 0xb
+ 1209 0636 6B010000 		.4byte	.LASF132
+ 1210 063a 05       		.byte	0x5
+ 1211 063b 1305     		.2byte	0x513
+ 1212 063d 58050000 		.4byte	0x558
+ 1213 0641 10       		.uleb128 0x10
+ 1214 0642 04       		.byte	0x4
+ 1215 0643 47060000 		.4byte	0x647
+ 1216 0647 11       		.uleb128 0x11
+ 1217 0648 52060000 		.4byte	0x652
+ 1218 064c 12       		.uleb128 0x12
+ 1219 064d CE000000 		.4byte	0xce
+ 1220 0651 00       		.byte	0
+ 1221 0652 0B       		.uleb128 0xb
+ 1222 0653 1B040000 		.4byte	.LASF133
+ 1223 0657 06       		.byte	0x6
+ 1224 0658 D901     		.2byte	0x1d9
+ 1225 065a 41060000 		.4byte	0x641
+ 1226 065e 13       		.uleb128 0x13
+ 1227 065f C50A0000 		.4byte	.LASF177
+ 1228 0663 38       		.byte	0x38
+ 1229 0664 06       		.byte	0x6
+ 1230 0665 7502     		.2byte	0x275
+ 1231 0667 22070000 		.4byte	0x722
+ 1232 066b 0D       		.uleb128 0xd
+ 1233 066c 840A0000 		.4byte	.LASF134
+ 1234 0670 06       		.byte	0x6
+ 1235 0671 7802     		.2byte	0x278
+ 1236 0673 E0000000 		.4byte	0xe0
+ 1237 0677 00       		.byte	0
+ 1238 0678 0D       		.uleb128 0xd
+ 1239 0679 80060000 		.4byte	.LASF135
+ 1240 067d 06       		.byte	0x6
+ 1241 067e 7902     		.2byte	0x279
+ 1242 0680 E0000000 		.4byte	0xe0
+ 1243 0684 04       		.byte	0x4
+ 1244 0685 0D       		.uleb128 0xd
+ 1245 0686 10010000 		.4byte	.LASF136
+ 1246 068a 06       		.byte	0x6
+ 1247 068b 7B02     		.2byte	0x27b
+ 1248 068d 1D050000 		.4byte	0x51d
+ 1249 0691 08       		.byte	0x8
+ 1250 0692 0D       		.uleb128 0xd
+ 1251 0693 58090000 		.4byte	.LASF137
+ 1252 0697 06       		.byte	0x6
+ 1253 0698 7C02     		.2byte	0x27c
+ 1254 069a CE000000 		.4byte	0xce
+ 1255 069e 0C       		.byte	0xc
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 26
+
+
+ 1256 069f 0D       		.uleb128 0xd
+ 1257 06a0 53050000 		.4byte	.LASF138
+ 1258 06a4 06       		.byte	0x6
+ 1259 06a5 7D02     		.2byte	0x27d
+ 1260 06a7 E0000000 		.4byte	0xe0
+ 1261 06ab 10       		.byte	0x10
+ 1262 06ac 0D       		.uleb128 0xd
+ 1263 06ad 600A0000 		.4byte	.LASF139
+ 1264 06b1 06       		.byte	0x6
+ 1265 06b2 7E02     		.2byte	0x27e
+ 1266 06b4 E0000000 		.4byte	0xe0
+ 1267 06b8 14       		.byte	0x14
+ 1268 06b9 0D       		.uleb128 0xd
+ 1269 06ba AE090000 		.4byte	.LASF140
+ 1270 06be 06       		.byte	0x6
+ 1271 06bf 8002     		.2byte	0x280
+ 1272 06c1 1D050000 		.4byte	0x51d
+ 1273 06c5 18       		.byte	0x18
+ 1274 06c6 0D       		.uleb128 0xd
+ 1275 06c7 19000000 		.4byte	.LASF141
+ 1276 06cb 06       		.byte	0x6
+ 1277 06cc 8102     		.2byte	0x281
+ 1278 06ce CE000000 		.4byte	0xce
+ 1279 06d2 1C       		.byte	0x1c
+ 1280 06d3 0D       		.uleb128 0xd
+ 1281 06d4 6B030000 		.4byte	.LASF142
+ 1282 06d8 06       		.byte	0x6
+ 1283 06d9 8202     		.2byte	0x282
+ 1284 06db E0000000 		.4byte	0xe0
+ 1285 06df 20       		.byte	0x20
+ 1286 06e0 0D       		.uleb128 0xd
+ 1287 06e1 BE000000 		.4byte	.LASF143
+ 1288 06e5 06       		.byte	0x6
+ 1289 06e6 8402     		.2byte	0x284
+ 1290 06e8 1D050000 		.4byte	0x51d
+ 1291 06ec 24       		.byte	0x24
+ 1292 06ed 0D       		.uleb128 0xd
+ 1293 06ee 94030000 		.4byte	.LASF144
+ 1294 06f2 06       		.byte	0x6
+ 1295 06f3 8502     		.2byte	0x285
+ 1296 06f5 CE000000 		.4byte	0xce
+ 1297 06f9 28       		.byte	0x28
+ 1298 06fa 0D       		.uleb128 0xd
+ 1299 06fb BA070000 		.4byte	.LASF145
+ 1300 06ff 06       		.byte	0x6
+ 1301 0700 8602     		.2byte	0x286
+ 1302 0702 E0000000 		.4byte	0xe0
+ 1303 0706 2C       		.byte	0x2c
+ 1304 0707 0D       		.uleb128 0xd
+ 1305 0708 DF040000 		.4byte	.LASF146
+ 1306 070c 06       		.byte	0x6
+ 1307 070d 8B02     		.2byte	0x28b
+ 1308 070f 52060000 		.4byte	0x652
+ 1309 0713 30       		.byte	0x30
+ 1310 0714 0D       		.uleb128 0xd
+ 1311 0715 A6090000 		.4byte	.LASF147
+ 1312 0719 06       		.byte	0x6
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 27
+
+
+ 1313 071a 8E02     		.2byte	0x28e
+ 1314 071c CE000000 		.4byte	0xce
+ 1315 0720 34       		.byte	0x34
+ 1316 0721 00       		.byte	0
+ 1317 0722 0B       		.uleb128 0xb
+ 1318 0723 B4090000 		.4byte	.LASF148
+ 1319 0727 06       		.byte	0x6
+ 1320 0728 9102     		.2byte	0x291
+ 1321 072a 5E060000 		.4byte	0x65e
+ 1322 072e 06       		.uleb128 0x6
+ 1323 072f 14       		.byte	0x14
+ 1324 0730 07       		.byte	0x7
+ 1325 0731 3B       		.byte	0x3b
+ 1326 0732 73070000 		.4byte	0x773
+ 1327 0736 07       		.uleb128 0x7
+ 1328 0737 31050000 		.4byte	.LASF149
+ 1329 073b 07       		.byte	0x7
+ 1330 073c 3D       		.byte	0x3d
+ 1331 073d CE000000 		.4byte	0xce
+ 1332 0741 00       		.byte	0
+ 1333 0742 07       		.uleb128 0x7
+ 1334 0743 0A050000 		.4byte	.LASF150
+ 1335 0747 07       		.byte	0x7
+ 1336 0748 3E       		.byte	0x3e
+ 1337 0749 CE000000 		.4byte	0xce
+ 1338 074d 04       		.byte	0x4
+ 1339 074e 07       		.uleb128 0x7
+ 1340 074f 55030000 		.4byte	.LASF151
+ 1341 0753 07       		.byte	0x7
+ 1342 0754 3F       		.byte	0x3f
+ 1343 0755 73070000 		.4byte	0x773
+ 1344 0759 08       		.byte	0x8
+ 1345 075a 07       		.uleb128 0x7
+ 1346 075b 66090000 		.4byte	.LASF152
+ 1347 075f 07       		.byte	0x7
+ 1348 0760 40       		.byte	0x40
+ 1349 0761 CE000000 		.4byte	0xce
+ 1350 0765 0C       		.byte	0xc
+ 1351 0766 07       		.uleb128 0x7
+ 1352 0767 D1010000 		.4byte	.LASF153
+ 1353 076b 07       		.byte	0x7
+ 1354 076c 45       		.byte	0x45
+ 1355 076d CE000000 		.4byte	0xce
+ 1356 0771 10       		.byte	0x10
+ 1357 0772 00       		.byte	0
+ 1358 0773 10       		.uleb128 0x10
+ 1359 0774 04       		.byte	0x4
+ 1360 0775 79070000 		.4byte	0x779
+ 1361 0779 14       		.uleb128 0x14
+ 1362 077a 35060000 		.4byte	0x635
+ 1363 077e 03       		.uleb128 0x3
+ 1364 077f 080A0000 		.4byte	.LASF154
+ 1365 0783 07       		.byte	0x7
+ 1366 0784 48       		.byte	0x48
+ 1367 0785 2E070000 		.4byte	0x72e
+ 1368 0789 10       		.uleb128 0x10
+ 1369 078a 04       		.byte	0x4
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 28
+
+
+ 1370 078b 08050000 		.4byte	0x508
+ 1371 078f 15       		.uleb128 0x15
+ 1372 0790 BE030000 		.4byte	.LASF178
+ 1373 0794 01       		.byte	0x1
+ 1374 0795 10       		.byte	0x10
+ 1375 0796 00000000 		.4byte	.LFB637
+ 1376 079a F8010000 		.4byte	.LFE637-.LFB637
+ 1377 079e 01       		.uleb128 0x1
+ 1378 079f 9C       		.byte	0x9c
+ 1379 07a0 F20B0000 		.4byte	0xbf2
+ 1380 07a4 16       		.uleb128 0x16
+ 1381 07a5 73747200 		.ascii	"str\000"
+ 1382 07a9 01       		.byte	0x1
+ 1383 07aa 10       		.byte	0x10
+ 1384 07ab 89070000 		.4byte	0x789
+ 1385 07af 00000000 		.4byte	.LLST0
+ 1386 07b3 17       		.uleb128 0x17
+ 1387 07b4 F2080000 		.4byte	.LASF155
+ 1388 07b8 01       		.byte	0x1
+ 1389 07b9 10       		.byte	0x10
+ 1390 07ba 89070000 		.4byte	0x789
+ 1391 07be 2C000000 		.4byte	.LLST1
+ 1392 07c2 17       		.uleb128 0x17
+ 1393 07c3 62020000 		.4byte	.LASF156
+ 1394 07c7 01       		.byte	0x1
+ 1395 07c8 10       		.byte	0x10
+ 1396 07c9 F20B0000 		.4byte	0xbf2
+ 1397 07cd A3000000 		.4byte	.LLST2
+ 1398 07d1 17       		.uleb128 0x17
+ 1399 07d2 41060000 		.4byte	.LASF157
+ 1400 07d6 01       		.byte	0x1
+ 1401 07d7 10       		.byte	0x10
+ 1402 07d8 89070000 		.4byte	0x789
+ 1403 07dc CF000000 		.4byte	.LLST3
+ 1404 07e0 17       		.uleb128 0x17
+ 1405 07e1 1F030000 		.4byte	.LASF158
+ 1406 07e5 01       		.byte	0x1
+ 1407 07e6 11       		.byte	0x11
+ 1408 07e7 F20B0000 		.4byte	0xbf2
+ 1409 07eb FB000000 		.4byte	.LLST4
+ 1410 07ef 17       		.uleb128 0x17
+ 1411 07f0 77050000 		.4byte	.LASF159
+ 1412 07f4 01       		.byte	0x1
+ 1413 07f5 11       		.byte	0x11
+ 1414 07f6 F20B0000 		.4byte	0xbf2
+ 1415 07fa 1B010000 		.4byte	.LLST5
+ 1416 07fe 17       		.uleb128 0x17
+ 1417 07ff 70070000 		.4byte	.LASF160
+ 1418 0803 01       		.byte	0x1
+ 1419 0804 11       		.byte	0x11
+ 1420 0805 F20B0000 		.4byte	0xbf2
+ 1421 0809 3B010000 		.4byte	.LLST6
+ 1422 080d 17       		.uleb128 0x17
+ 1423 080e F3050000 		.4byte	.LASF161
+ 1424 0812 01       		.byte	0x1
+ 1425 0813 11       		.byte	0x11
+ 1426 0814 89070000 		.4byte	0x789
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 29
+
+
+ 1427 0818 5B010000 		.4byte	.LLST7
+ 1428 081c 18       		.uleb128 0x18
+ 1429 081d 6E000000 		.4byte	.LBB2
+ 1430 0821 22000000 		.4byte	.LBE2-.LBB2
+ 1431 0825 8B080000 		.4byte	0x88b
+ 1432 0829 19       		.uleb128 0x19
+ 1433 082a C8050000 		.4byte	.LASF162
+ 1434 082e 01       		.byte	0x1
+ 1435 082f 2C       		.byte	0x2c
+ 1436 0830 94000000 		.4byte	0x94
+ 1437 0834 02       		.uleb128 0x2
+ 1438 0835 91       		.byte	0x91
+ 1439 0836 64       		.sleb128 -28
+ 1440 0837 1A       		.uleb128 0x1a
+ 1441 0838 7A000000 		.4byte	.LVL13
+ 1442 083c 5C0C0000 		.4byte	0xc5c
+ 1443 0840 57080000 		.4byte	0x857
+ 1444 0844 1B       		.uleb128 0x1b
+ 1445 0845 01       		.uleb128 0x1
+ 1446 0846 50       		.byte	0x50
+ 1447 0847 02       		.uleb128 0x2
+ 1448 0848 74       		.byte	0x74
+ 1449 0849 00       		.sleb128 0
+ 1450 084a 1B       		.uleb128 0x1b
+ 1451 084b 01       		.uleb128 0x1
+ 1452 084c 51       		.byte	0x51
+ 1453 084d 02       		.uleb128 0x2
+ 1454 084e 75       		.byte	0x75
+ 1455 084f 00       		.sleb128 0
+ 1456 0850 1B       		.uleb128 0x1b
+ 1457 0851 01       		.uleb128 0x1
+ 1458 0852 52       		.byte	0x52
+ 1459 0853 02       		.uleb128 0x2
+ 1460 0854 76       		.byte	0x76
+ 1461 0855 00       		.sleb128 0
+ 1462 0856 00       		.byte	0
+ 1463 0857 1A       		.uleb128 0x1a
+ 1464 0858 88000000 		.4byte	.LVL14
+ 1465 085c 5C0C0000 		.4byte	0xc5c
+ 1466 0860 77080000 		.4byte	0x877
+ 1467 0864 1B       		.uleb128 0x1b
+ 1468 0865 01       		.uleb128 0x1
+ 1469 0866 50       		.byte	0x50
+ 1470 0867 02       		.uleb128 0x2
+ 1471 0868 74       		.byte	0x74
+ 1472 0869 00       		.sleb128 0
+ 1473 086a 1B       		.uleb128 0x1b
+ 1474 086b 01       		.uleb128 0x1
+ 1475 086c 51       		.byte	0x51
+ 1476 086d 02       		.uleb128 0x2
+ 1477 086e 75       		.byte	0x75
+ 1478 086f 00       		.sleb128 0
+ 1479 0870 1B       		.uleb128 0x1b
+ 1480 0871 01       		.uleb128 0x1
+ 1481 0872 52       		.byte	0x52
+ 1482 0873 02       		.uleb128 0x2
+ 1483 0874 91       		.byte	0x91
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 30
+
+
+ 1484 0875 64       		.sleb128 -28
+ 1485 0876 00       		.byte	0
+ 1486 0877 1C       		.uleb128 0x1c
+ 1487 0878 90000000 		.4byte	.LVL15
+ 1488 087c 670C0000 		.4byte	0xc67
+ 1489 0880 1B       		.uleb128 0x1b
+ 1490 0881 01       		.uleb128 0x1
+ 1491 0882 50       		.byte	0x50
+ 1492 0883 05       		.uleb128 0x5
+ 1493 0884 03       		.byte	0x3
+ 1494 0885 84000000 		.4byte	.LC9
+ 1495 0889 00       		.byte	0
+ 1496 088a 00       		.byte	0
+ 1497 088b 18       		.uleb128 0x18
+ 1498 088c BA000000 		.4byte	.LBB3
+ 1499 0890 24000000 		.4byte	.LBE3-.LBB3
+ 1500 0894 FB080000 		.4byte	0x8fb
+ 1501 0898 19       		.uleb128 0x19
+ 1502 0899 6E060000 		.4byte	.LASF163
+ 1503 089d 01       		.byte	0x1
+ 1504 089e 3E       		.byte	0x3e
+ 1505 089f 94000000 		.4byte	0x94
+ 1506 08a3 02       		.uleb128 0x2
+ 1507 08a4 91       		.byte	0x91
+ 1508 08a5 64       		.sleb128 -28
+ 1509 08a6 1A       		.uleb128 0x1a
+ 1510 08a7 C6000000 		.4byte	.LVL22
+ 1511 08ab 5C0C0000 		.4byte	0xc5c
+ 1512 08af C7080000 		.4byte	0x8c7
+ 1513 08b3 1B       		.uleb128 0x1b
+ 1514 08b4 01       		.uleb128 0x1
+ 1515 08b5 50       		.byte	0x50
+ 1516 08b6 02       		.uleb128 0x2
+ 1517 08b7 74       		.byte	0x74
+ 1518 08b8 00       		.sleb128 0
+ 1519 08b9 1B       		.uleb128 0x1b
+ 1520 08ba 01       		.uleb128 0x1
+ 1521 08bb 51       		.byte	0x51
+ 1522 08bc 02       		.uleb128 0x2
+ 1523 08bd 75       		.byte	0x75
+ 1524 08be 00       		.sleb128 0
+ 1525 08bf 1B       		.uleb128 0x1b
+ 1526 08c0 01       		.uleb128 0x1
+ 1527 08c1 52       		.byte	0x52
+ 1528 08c2 03       		.uleb128 0x3
+ 1529 08c3 91       		.byte	0x91
+ 1530 08c4 00       		.sleb128 0
+ 1531 08c5 06       		.byte	0x6
+ 1532 08c6 00       		.byte	0
+ 1533 08c7 1A       		.uleb128 0x1a
+ 1534 08c8 D6000000 		.4byte	.LVL23
+ 1535 08cc 5C0C0000 		.4byte	0xc5c
+ 1536 08d0 E7080000 		.4byte	0x8e7
+ 1537 08d4 1B       		.uleb128 0x1b
+ 1538 08d5 01       		.uleb128 0x1
+ 1539 08d6 50       		.byte	0x50
+ 1540 08d7 02       		.uleb128 0x2
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 31
+
+
+ 1541 08d8 74       		.byte	0x74
+ 1542 08d9 00       		.sleb128 0
+ 1543 08da 1B       		.uleb128 0x1b
+ 1544 08db 01       		.uleb128 0x1
+ 1545 08dc 51       		.byte	0x51
+ 1546 08dd 02       		.uleb128 0x2
+ 1547 08de 75       		.byte	0x75
+ 1548 08df 00       		.sleb128 0
+ 1549 08e0 1B       		.uleb128 0x1b
+ 1550 08e1 01       		.uleb128 0x1
+ 1551 08e2 52       		.byte	0x52
+ 1552 08e3 02       		.uleb128 0x2
+ 1553 08e4 91       		.byte	0x91
+ 1554 08e5 64       		.sleb128 -28
+ 1555 08e6 00       		.byte	0
+ 1556 08e7 1C       		.uleb128 0x1c
+ 1557 08e8 DE000000 		.4byte	.LVL24
+ 1558 08ec 670C0000 		.4byte	0xc67
+ 1559 08f0 1B       		.uleb128 0x1b
+ 1560 08f1 01       		.uleb128 0x1
+ 1561 08f2 50       		.byte	0x50
+ 1562 08f3 05       		.uleb128 0x5
+ 1563 08f4 03       		.byte	0x3
+ 1564 08f5 18010000 		.4byte	.LC15
+ 1565 08f9 00       		.byte	0
+ 1566 08fa 00       		.byte	0
+ 1567 08fb 18       		.uleb128 0x18
+ 1568 08fc EA000000 		.4byte	.LBB4
+ 1569 0900 58000000 		.4byte	.LBE4-.LBB4
+ 1570 0904 82090000 		.4byte	0x982
+ 1571 0908 19       		.uleb128 0x19
+ 1572 0909 01050000 		.4byte	.LASF164
+ 1573 090d 01       		.byte	0x1
+ 1574 090e 47       		.byte	0x47
+ 1575 090f 94000000 		.4byte	0x94
+ 1576 0913 02       		.uleb128 0x2
+ 1577 0914 91       		.byte	0x91
+ 1578 0915 64       		.sleb128 -28
+ 1579 0916 1A       		.uleb128 0x1a
+ 1580 0917 F6000000 		.4byte	.LVL28
+ 1581 091b 5C0C0000 		.4byte	0xc5c
+ 1582 091f 37090000 		.4byte	0x937
+ 1583 0923 1B       		.uleb128 0x1b
+ 1584 0924 01       		.uleb128 0x1
+ 1585 0925 50       		.byte	0x50
+ 1586 0926 02       		.uleb128 0x2
+ 1587 0927 74       		.byte	0x74
+ 1588 0928 00       		.sleb128 0
+ 1589 0929 1B       		.uleb128 0x1b
+ 1590 092a 01       		.uleb128 0x1
+ 1591 092b 51       		.byte	0x51
+ 1592 092c 02       		.uleb128 0x2
+ 1593 092d 75       		.byte	0x75
+ 1594 092e 00       		.sleb128 0
+ 1595 092f 1B       		.uleb128 0x1b
+ 1596 0930 01       		.uleb128 0x1
+ 1597 0931 52       		.byte	0x52
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 32
+
+
+ 1598 0932 03       		.uleb128 0x3
+ 1599 0933 91       		.byte	0x91
+ 1600 0934 04       		.sleb128 4
+ 1601 0935 06       		.byte	0x6
+ 1602 0936 00       		.byte	0
+ 1603 0937 1A       		.uleb128 0x1a
+ 1604 0938 06010000 		.4byte	.LVL29
+ 1605 093c 5C0C0000 		.4byte	0xc5c
+ 1606 0940 57090000 		.4byte	0x957
+ 1607 0944 1B       		.uleb128 0x1b
+ 1608 0945 01       		.uleb128 0x1
+ 1609 0946 50       		.byte	0x50
+ 1610 0947 02       		.uleb128 0x2
+ 1611 0948 74       		.byte	0x74
+ 1612 0949 00       		.sleb128 0
+ 1613 094a 1B       		.uleb128 0x1b
+ 1614 094b 01       		.uleb128 0x1
+ 1615 094c 51       		.byte	0x51
+ 1616 094d 02       		.uleb128 0x2
+ 1617 094e 75       		.byte	0x75
+ 1618 094f 00       		.sleb128 0
+ 1619 0950 1B       		.uleb128 0x1b
+ 1620 0951 01       		.uleb128 0x1
+ 1621 0952 52       		.byte	0x52
+ 1622 0953 02       		.uleb128 0x2
+ 1623 0954 91       		.byte	0x91
+ 1624 0955 64       		.sleb128 -28
+ 1625 0956 00       		.byte	0
+ 1626 0957 1A       		.uleb128 0x1a
+ 1627 0958 38010000 		.4byte	.LVL30
+ 1628 095c 670C0000 		.4byte	0xc67
+ 1629 0960 6E090000 		.4byte	0x96e
+ 1630 0964 1B       		.uleb128 0x1b
+ 1631 0965 01       		.uleb128 0x1
+ 1632 0966 50       		.byte	0x50
+ 1633 0967 05       		.uleb128 0x5
+ 1634 0968 03       		.byte	0x3
+ 1635 0969 54010000 		.4byte	.LC18
+ 1636 096d 00       		.byte	0
+ 1637 096e 1C       		.uleb128 0x1c
+ 1638 096f 40010000 		.4byte	.LVL31
+ 1639 0973 720C0000 		.4byte	0xc72
+ 1640 0977 1B       		.uleb128 0x1b
+ 1641 0978 01       		.uleb128 0x1
+ 1642 0979 50       		.byte	0x50
+ 1643 097a 05       		.uleb128 0x5
+ 1644 097b 03       		.byte	0x3
+ 1645 097c 7C010000 		.4byte	.LC19
+ 1646 0980 00       		.byte	0
+ 1647 0981 00       		.byte	0
+ 1648 0982 18       		.uleb128 0x18
+ 1649 0983 4C010000 		.4byte	.LBB5
+ 1650 0987 46000000 		.4byte	.LBE5-.LBB5
+ 1651 098b 090A0000 		.4byte	0xa09
+ 1652 098f 19       		.uleb128 0x19
+ 1653 0990 23090000 		.4byte	.LASF165
+ 1654 0994 01       		.byte	0x1
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 33
+
+
+ 1655 0995 56       		.byte	0x56
+ 1656 0996 94000000 		.4byte	0x94
+ 1657 099a 02       		.uleb128 0x2
+ 1658 099b 91       		.byte	0x91
+ 1659 099c 64       		.sleb128 -28
+ 1660 099d 1A       		.uleb128 0x1a
+ 1661 099e 58010000 		.4byte	.LVL35
+ 1662 09a2 5C0C0000 		.4byte	0xc5c
+ 1663 09a6 BE090000 		.4byte	0x9be
+ 1664 09aa 1B       		.uleb128 0x1b
+ 1665 09ab 01       		.uleb128 0x1
+ 1666 09ac 50       		.byte	0x50
+ 1667 09ad 02       		.uleb128 0x2
+ 1668 09ae 74       		.byte	0x74
+ 1669 09af 00       		.sleb128 0
+ 1670 09b0 1B       		.uleb128 0x1b
+ 1671 09b1 01       		.uleb128 0x1
+ 1672 09b2 51       		.byte	0x51
+ 1673 09b3 02       		.uleb128 0x2
+ 1674 09b4 75       		.byte	0x75
+ 1675 09b5 00       		.sleb128 0
+ 1676 09b6 1B       		.uleb128 0x1b
+ 1677 09b7 01       		.uleb128 0x1
+ 1678 09b8 52       		.byte	0x52
+ 1679 09b9 03       		.uleb128 0x3
+ 1680 09ba 91       		.byte	0x91
+ 1681 09bb 08       		.sleb128 8
+ 1682 09bc 06       		.byte	0x6
+ 1683 09bd 00       		.byte	0
+ 1684 09be 1A       		.uleb128 0x1a
+ 1685 09bf 68010000 		.4byte	.LVL36
+ 1686 09c3 5C0C0000 		.4byte	0xc5c
+ 1687 09c7 DE090000 		.4byte	0x9de
+ 1688 09cb 1B       		.uleb128 0x1b
+ 1689 09cc 01       		.uleb128 0x1
+ 1690 09cd 50       		.byte	0x50
+ 1691 09ce 02       		.uleb128 0x2
+ 1692 09cf 74       		.byte	0x74
+ 1693 09d0 00       		.sleb128 0
+ 1694 09d1 1B       		.uleb128 0x1b
+ 1695 09d2 01       		.uleb128 0x1
+ 1696 09d3 51       		.byte	0x51
+ 1697 09d4 02       		.uleb128 0x2
+ 1698 09d5 75       		.byte	0x75
+ 1699 09d6 00       		.sleb128 0
+ 1700 09d7 1B       		.uleb128 0x1b
+ 1701 09d8 01       		.uleb128 0x1
+ 1702 09d9 52       		.byte	0x52
+ 1703 09da 02       		.uleb128 0x2
+ 1704 09db 91       		.byte	0x91
+ 1705 09dc 64       		.sleb128 -28
+ 1706 09dd 00       		.byte	0
+ 1707 09de 1A       		.uleb128 0x1a
+ 1708 09df 8A010000 		.4byte	.LVL37
+ 1709 09e3 670C0000 		.4byte	0xc67
+ 1710 09e7 F5090000 		.4byte	0x9f5
+ 1711 09eb 1B       		.uleb128 0x1b
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 34
+
+
+ 1712 09ec 01       		.uleb128 0x1
+ 1713 09ed 50       		.byte	0x50
+ 1714 09ee 05       		.uleb128 0x5
+ 1715 09ef 03       		.byte	0x3
+ 1716 09f0 B0010000 		.4byte	.LC22
+ 1717 09f4 00       		.byte	0
+ 1718 09f5 1C       		.uleb128 0x1c
+ 1719 09f6 92010000 		.4byte	.LVL38
+ 1720 09fa 720C0000 		.4byte	0xc72
+ 1721 09fe 1B       		.uleb128 0x1b
+ 1722 09ff 01       		.uleb128 0x1
+ 1723 0a00 50       		.byte	0x50
+ 1724 0a01 05       		.uleb128 0x5
+ 1725 0a02 03       		.byte	0x3
+ 1726 0a03 D8010000 		.4byte	.LC23
+ 1727 0a07 00       		.byte	0
+ 1728 0a08 00       		.byte	0
+ 1729 0a09 1A       		.uleb128 0x1a
+ 1730 0a0a 12000000 		.4byte	.LVL2
+ 1731 0a0e 810C0000 		.4byte	0xc81
+ 1732 0a12 260A0000 		.4byte	0xa26
+ 1733 0a16 1B       		.uleb128 0x1b
+ 1734 0a17 01       		.uleb128 0x1
+ 1735 0a18 50       		.byte	0x50
+ 1736 0a19 02       		.uleb128 0x2
+ 1737 0a1a 74       		.byte	0x74
+ 1738 0a1b 00       		.sleb128 0
+ 1739 0a1c 1B       		.uleb128 0x1b
+ 1740 0a1d 01       		.uleb128 0x1
+ 1741 0a1e 51       		.byte	0x51
+ 1742 0a1f 05       		.uleb128 0x5
+ 1743 0a20 03       		.byte	0x3
+ 1744 0a21 00000000 		.4byte	.LC0
+ 1745 0a25 00       		.byte	0
+ 1746 0a26 1A       		.uleb128 0x1a
+ 1747 0a27 1E000000 		.4byte	.LVL3
+ 1748 0a2b 5C0C0000 		.4byte	0xc5c
+ 1749 0a2f 4A0A0000 		.4byte	0xa4a
+ 1750 0a33 1B       		.uleb128 0x1b
+ 1751 0a34 01       		.uleb128 0x1
+ 1752 0a35 50       		.byte	0x50
+ 1753 0a36 02       		.uleb128 0x2
+ 1754 0a37 74       		.byte	0x74
+ 1755 0a38 00       		.sleb128 0
+ 1756 0a39 1B       		.uleb128 0x1b
+ 1757 0a3a 01       		.uleb128 0x1
+ 1758 0a3b 51       		.byte	0x51
+ 1759 0a3c 05       		.uleb128 0x5
+ 1760 0a3d 03       		.byte	0x3
+ 1761 0a3e 08000000 		.4byte	.LC1
+ 1762 0a42 1B       		.uleb128 0x1b
+ 1763 0a43 01       		.uleb128 0x1
+ 1764 0a44 52       		.byte	0x52
+ 1765 0a45 03       		.uleb128 0x3
+ 1766 0a46 91       		.byte	0x91
+ 1767 0a47 0C       		.sleb128 12
+ 1768 0a48 06       		.byte	0x6
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 35
+
+
+ 1769 0a49 00       		.byte	0
+ 1770 0a4a 1A       		.uleb128 0x1a
+ 1771 0a4b 26000000 		.4byte	.LVL4
+ 1772 0a4f 670C0000 		.4byte	0xc67
+ 1773 0a53 680A0000 		.4byte	0xa68
+ 1774 0a57 1B       		.uleb128 0x1b
+ 1775 0a58 01       		.uleb128 0x1
+ 1776 0a59 50       		.byte	0x50
+ 1777 0a5a 05       		.uleb128 0x5
+ 1778 0a5b 03       		.byte	0x3
+ 1779 0a5c 0C000000 		.4byte	.LC2
+ 1780 0a60 1B       		.uleb128 0x1b
+ 1781 0a61 01       		.uleb128 0x1
+ 1782 0a62 51       		.byte	0x51
+ 1783 0a63 03       		.uleb128 0x3
+ 1784 0a64 91       		.byte	0x91
+ 1785 0a65 0C       		.sleb128 12
+ 1786 0a66 06       		.byte	0x6
+ 1787 0a67 00       		.byte	0
+ 1788 0a68 1A       		.uleb128 0x1a
+ 1789 0a69 30000000 		.4byte	.LVL5
+ 1790 0a6d 810C0000 		.4byte	0xc81
+ 1791 0a71 850A0000 		.4byte	0xa85
+ 1792 0a75 1B       		.uleb128 0x1b
+ 1793 0a76 01       		.uleb128 0x1
+ 1794 0a77 50       		.byte	0x50
+ 1795 0a78 02       		.uleb128 0x2
+ 1796 0a79 74       		.byte	0x74
+ 1797 0a7a 00       		.sleb128 0
+ 1798 0a7b 1B       		.uleb128 0x1b
+ 1799 0a7c 01       		.uleb128 0x1
+ 1800 0a7d 51       		.byte	0x51
+ 1801 0a7e 05       		.uleb128 0x5
+ 1802 0a7f 03       		.byte	0x3
+ 1803 0a80 1C000000 		.4byte	.LC3
+ 1804 0a84 00       		.byte	0
+ 1805 0a85 1A       		.uleb128 0x1a
+ 1806 0a86 3C000000 		.4byte	.LVL6
+ 1807 0a8a 5C0C0000 		.4byte	0xc5c
+ 1808 0a8e A90A0000 		.4byte	0xaa9
+ 1809 0a92 1B       		.uleb128 0x1b
+ 1810 0a93 01       		.uleb128 0x1
+ 1811 0a94 50       		.byte	0x50
+ 1812 0a95 02       		.uleb128 0x2
+ 1813 0a96 74       		.byte	0x74
+ 1814 0a97 00       		.sleb128 0
+ 1815 0a98 1B       		.uleb128 0x1b
+ 1816 0a99 01       		.uleb128 0x1
+ 1817 0a9a 51       		.byte	0x51
+ 1818 0a9b 05       		.uleb128 0x5
+ 1819 0a9c 03       		.byte	0x3
+ 1820 0a9d 08000000 		.4byte	.LC1
+ 1821 0aa1 1B       		.uleb128 0x1b
+ 1822 0aa2 01       		.uleb128 0x1
+ 1823 0aa3 52       		.byte	0x52
+ 1824 0aa4 03       		.uleb128 0x3
+ 1825 0aa5 91       		.byte	0x91
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 36
+
+
+ 1826 0aa6 0C       		.sleb128 12
+ 1827 0aa7 06       		.byte	0x6
+ 1828 0aa8 00       		.byte	0
+ 1829 0aa9 1A       		.uleb128 0x1a
+ 1830 0aaa 44000000 		.4byte	.LVL7
+ 1831 0aae 670C0000 		.4byte	0xc67
+ 1832 0ab2 C70A0000 		.4byte	0xac7
+ 1833 0ab6 1B       		.uleb128 0x1b
+ 1834 0ab7 01       		.uleb128 0x1
+ 1835 0ab8 50       		.byte	0x50
+ 1836 0ab9 05       		.uleb128 0x5
+ 1837 0aba 03       		.byte	0x3
+ 1838 0abb 0C000000 		.4byte	.LC2
+ 1839 0abf 1B       		.uleb128 0x1b
+ 1840 0ac0 01       		.uleb128 0x1
+ 1841 0ac1 51       		.byte	0x51
+ 1842 0ac2 03       		.uleb128 0x3
+ 1843 0ac3 91       		.byte	0x91
+ 1844 0ac4 0C       		.sleb128 12
+ 1845 0ac5 06       		.byte	0x6
+ 1846 0ac6 00       		.byte	0
+ 1847 0ac7 1A       		.uleb128 0x1a
+ 1848 0ac8 4E000000 		.4byte	.LVL8
+ 1849 0acc 810C0000 		.4byte	0xc81
+ 1850 0ad0 E40A0000 		.4byte	0xae4
+ 1851 0ad4 1B       		.uleb128 0x1b
+ 1852 0ad5 01       		.uleb128 0x1
+ 1853 0ad6 50       		.byte	0x50
+ 1854 0ad7 02       		.uleb128 0x2
+ 1855 0ad8 74       		.byte	0x74
+ 1856 0ad9 00       		.sleb128 0
+ 1857 0ada 1B       		.uleb128 0x1b
+ 1858 0adb 01       		.uleb128 0x1
+ 1859 0adc 51       		.byte	0x51
+ 1860 0add 05       		.uleb128 0x5
+ 1861 0ade 03       		.byte	0x3
+ 1862 0adf 24000000 		.4byte	.LC4
+ 1863 0ae3 00       		.byte	0
+ 1864 0ae4 1A       		.uleb128 0x1a
+ 1865 0ae5 5A000000 		.4byte	.LVL9
+ 1866 0ae9 5C0C0000 		.4byte	0xc5c
+ 1867 0aed 070B0000 		.4byte	0xb07
+ 1868 0af1 1B       		.uleb128 0x1b
+ 1869 0af2 01       		.uleb128 0x1
+ 1870 0af3 50       		.byte	0x50
+ 1871 0af4 02       		.uleb128 0x2
+ 1872 0af5 74       		.byte	0x74
+ 1873 0af6 00       		.sleb128 0
+ 1874 0af7 1B       		.uleb128 0x1b
+ 1875 0af8 01       		.uleb128 0x1
+ 1876 0af9 51       		.byte	0x51
+ 1877 0afa 05       		.uleb128 0x5
+ 1878 0afb 03       		.byte	0x3
+ 1879 0afc 30000000 		.4byte	.LC5
+ 1880 0b00 1B       		.uleb128 0x1b
+ 1881 0b01 01       		.uleb128 0x1
+ 1882 0b02 52       		.byte	0x52
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 37
+
+
+ 1883 0b03 02       		.uleb128 0x2
+ 1884 0b04 75       		.byte	0x75
+ 1885 0b05 00       		.sleb128 0
+ 1886 0b06 00       		.byte	0
+ 1887 0b07 1A       		.uleb128 0x1a
+ 1888 0b08 62000000 		.4byte	.LVL10
+ 1889 0b0c 670C0000 		.4byte	0xc67
+ 1890 0b10 240B0000 		.4byte	0xb24
+ 1891 0b14 1B       		.uleb128 0x1b
+ 1892 0b15 01       		.uleb128 0x1
+ 1893 0b16 50       		.byte	0x50
+ 1894 0b17 05       		.uleb128 0x5
+ 1895 0b18 03       		.byte	0x3
+ 1896 0b19 3C000000 		.4byte	.LC6
+ 1897 0b1d 1B       		.uleb128 0x1b
+ 1898 0b1e 01       		.uleb128 0x1
+ 1899 0b1f 51       		.byte	0x51
+ 1900 0b20 02       		.uleb128 0x2
+ 1901 0b21 75       		.byte	0x75
+ 1902 0b22 00       		.sleb128 0
+ 1903 0b23 00       		.byte	0
+ 1904 0b24 1A       		.uleb128 0x1a
+ 1905 0b25 6C000000 		.4byte	.LVL11
+ 1906 0b29 810C0000 		.4byte	0xc81
+ 1907 0b2d 410B0000 		.4byte	0xb41
+ 1908 0b31 1B       		.uleb128 0x1b
+ 1909 0b32 01       		.uleb128 0x1
+ 1910 0b33 50       		.byte	0x50
+ 1911 0b34 02       		.uleb128 0x2
+ 1912 0b35 74       		.byte	0x74
+ 1913 0b36 00       		.sleb128 0
+ 1914 0b37 1B       		.uleb128 0x1b
+ 1915 0b38 01       		.uleb128 0x1
+ 1916 0b39 51       		.byte	0x51
+ 1917 0b3a 05       		.uleb128 0x5
+ 1918 0b3b 03       		.byte	0x3
+ 1919 0b3c 58000000 		.4byte	.LC7
+ 1920 0b40 00       		.byte	0
+ 1921 0b41 1A       		.uleb128 0x1a
+ 1922 0b42 9A000000 		.4byte	.LVL17
+ 1923 0b46 810C0000 		.4byte	0xc81
+ 1924 0b4a 5E0B0000 		.4byte	0xb5e
+ 1925 0b4e 1B       		.uleb128 0x1b
+ 1926 0b4f 01       		.uleb128 0x1
+ 1927 0b50 50       		.byte	0x50
+ 1928 0b51 02       		.uleb128 0x2
+ 1929 0b52 74       		.byte	0x74
+ 1930 0b53 00       		.sleb128 0
+ 1931 0b54 1B       		.uleb128 0x1b
+ 1932 0b55 01       		.uleb128 0x1
+ 1933 0b56 51       		.byte	0x51
+ 1934 0b57 05       		.uleb128 0x5
+ 1935 0b58 03       		.byte	0x3
+ 1936 0b59 A4000000 		.4byte	.LC10
+ 1937 0b5d 00       		.byte	0
+ 1938 0b5e 1A       		.uleb128 0x1a
+ 1939 0b5f A6000000 		.4byte	.LVL18
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 38
+
+
+ 1940 0b63 5C0C0000 		.4byte	0xc5c
+ 1941 0b67 810B0000 		.4byte	0xb81
+ 1942 0b6b 1B       		.uleb128 0x1b
+ 1943 0b6c 01       		.uleb128 0x1
+ 1944 0b6d 50       		.byte	0x50
+ 1945 0b6e 02       		.uleb128 0x2
+ 1946 0b6f 74       		.byte	0x74
+ 1947 0b70 00       		.sleb128 0
+ 1948 0b71 1B       		.uleb128 0x1b
+ 1949 0b72 01       		.uleb128 0x1
+ 1950 0b73 51       		.byte	0x51
+ 1951 0b74 05       		.uleb128 0x5
+ 1952 0b75 03       		.byte	0x3
+ 1953 0b76 B8000000 		.4byte	.LC11
+ 1954 0b7a 1B       		.uleb128 0x1b
+ 1955 0b7b 01       		.uleb128 0x1
+ 1956 0b7c 52       		.byte	0x52
+ 1957 0b7d 02       		.uleb128 0x2
+ 1958 0b7e 77       		.byte	0x77
+ 1959 0b7f 00       		.sleb128 0
+ 1960 0b80 00       		.byte	0
+ 1961 0b81 1A       		.uleb128 0x1a
+ 1962 0b82 AE000000 		.4byte	.LVL19
+ 1963 0b86 670C0000 		.4byte	0xc67
+ 1964 0b8a 9E0B0000 		.4byte	0xb9e
+ 1965 0b8e 1B       		.uleb128 0x1b
+ 1966 0b8f 01       		.uleb128 0x1
+ 1967 0b90 50       		.byte	0x50
+ 1968 0b91 05       		.uleb128 0x5
+ 1969 0b92 03       		.byte	0x3
+ 1970 0b93 D0000000 		.4byte	.LC12
+ 1971 0b97 1B       		.uleb128 0x1b
+ 1972 0b98 01       		.uleb128 0x1
+ 1973 0b99 51       		.byte	0x51
+ 1974 0b9a 02       		.uleb128 0x2
+ 1975 0b9b 77       		.byte	0x77
+ 1976 0b9c 00       		.sleb128 0
+ 1977 0b9d 00       		.byte	0
+ 1978 0b9e 1A       		.uleb128 0x1a
+ 1979 0b9f B8000000 		.4byte	.LVL20
+ 1980 0ba3 810C0000 		.4byte	0xc81
+ 1981 0ba7 BB0B0000 		.4byte	0xbbb
+ 1982 0bab 1B       		.uleb128 0x1b
+ 1983 0bac 01       		.uleb128 0x1
+ 1984 0bad 50       		.byte	0x50
+ 1985 0bae 02       		.uleb128 0x2
+ 1986 0baf 74       		.byte	0x74
+ 1987 0bb0 00       		.sleb128 0
+ 1988 0bb1 1B       		.uleb128 0x1b
+ 1989 0bb2 01       		.uleb128 0x1
+ 1990 0bb3 51       		.byte	0x51
+ 1991 0bb4 05       		.uleb128 0x5
+ 1992 0bb5 03       		.byte	0x3
+ 1993 0bb6 EC000000 		.4byte	.LC13
+ 1994 0bba 00       		.byte	0
+ 1995 0bbb 1A       		.uleb128 0x1a
+ 1996 0bbc E8000000 		.4byte	.LVL26
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 39
+
+
+ 1997 0bc0 810C0000 		.4byte	0xc81
+ 1998 0bc4 D80B0000 		.4byte	0xbd8
+ 1999 0bc8 1B       		.uleb128 0x1b
+ 2000 0bc9 01       		.uleb128 0x1
+ 2001 0bca 50       		.byte	0x50
+ 2002 0bcb 02       		.uleb128 0x2
+ 2003 0bcc 74       		.byte	0x74
+ 2004 0bcd 00       		.sleb128 0
+ 2005 0bce 1B       		.uleb128 0x1b
+ 2006 0bcf 01       		.uleb128 0x1
+ 2007 0bd0 51       		.byte	0x51
+ 2008 0bd1 05       		.uleb128 0x5
+ 2009 0bd2 03       		.byte	0x3
+ 2010 0bd3 38010000 		.4byte	.LC16
+ 2011 0bd7 00       		.byte	0
+ 2012 0bd8 1C       		.uleb128 0x1c
+ 2013 0bd9 4A010000 		.4byte	.LVL33
+ 2014 0bdd 810C0000 		.4byte	0xc81
+ 2015 0be1 1B       		.uleb128 0x1b
+ 2016 0be2 01       		.uleb128 0x1
+ 2017 0be3 50       		.byte	0x50
+ 2018 0be4 02       		.uleb128 0x2
+ 2019 0be5 74       		.byte	0x74
+ 2020 0be6 00       		.sleb128 0
+ 2021 0be7 1B       		.uleb128 0x1b
+ 2022 0be8 01       		.uleb128 0x1
+ 2023 0be9 51       		.byte	0x51
+ 2024 0bea 05       		.uleb128 0x5
+ 2025 0beb 03       		.byte	0x3
+ 2026 0bec 94010000 		.4byte	.LC20
+ 2027 0bf0 00       		.byte	0
+ 2028 0bf1 00       		.byte	0
+ 2029 0bf2 10       		.uleb128 0x10
+ 2030 0bf3 04       		.byte	0x4
+ 2031 0bf4 94000000 		.4byte	0x94
+ 2032 0bf8 1D       		.uleb128 0x1d
+ 2033 0bf9 30010000 		.4byte	.LASF166
+ 2034 0bfd 08       		.byte	0x8
+ 2035 0bfe F907     		.2byte	0x7f9
+ 2036 0c00 040C0000 		.4byte	0xc04
+ 2037 0c04 05       		.uleb128 0x5
+ 2038 0c05 C3000000 		.4byte	0xc3
+ 2039 0c09 1E       		.uleb128 0x1e
+ 2040 0c0a 8E070000 		.4byte	.LASF167
+ 2041 0c0e 04       		.byte	0x4
+ 2042 0c0f A7       		.byte	0xa7
+ 2043 0c10 140C0000 		.4byte	0xc14
+ 2044 0c14 10       		.uleb128 0x10
+ 2045 0c15 04       		.byte	0x4
+ 2046 0c16 1A0C0000 		.4byte	0xc1a
+ 2047 0c1a 14       		.uleb128 0x14
+ 2048 0c1b FD040000 		.4byte	0x4fd
+ 2049 0c1f 1D       		.uleb128 0x1d
+ 2050 0c20 A0080000 		.4byte	.LASF168
+ 2051 0c24 07       		.byte	0x7
+ 2052 0c25 6001     		.2byte	0x160
+ 2053 0c27 CE000000 		.4byte	0xce
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 40
+
+
+ 2054 0c2b 0E       		.uleb128 0xe
+ 2055 0c2c 3B0C0000 		.4byte	0xc3b
+ 2056 0c30 3B0C0000 		.4byte	0xc3b
+ 2057 0c34 0F       		.uleb128 0xf
+ 2058 0c35 D9000000 		.4byte	0xd9
+ 2059 0c39 00       		.byte	0
+ 2060 0c3a 00       		.byte	0
+ 2061 0c3b 14       		.uleb128 0x14
+ 2062 0c3c 7E070000 		.4byte	0x77e
+ 2063 0c40 1D       		.uleb128 0x1d
+ 2064 0c41 C3040000 		.4byte	.LASF169
+ 2065 0c45 07       		.byte	0x7
+ 2066 0c46 6401     		.2byte	0x164
+ 2067 0c48 4C0C0000 		.4byte	0xc4c
+ 2068 0c4c 14       		.uleb128 0x14
+ 2069 0c4d 2B0C0000 		.4byte	0xc2b
+ 2070 0c51 1E       		.uleb128 0x1e
+ 2071 0c52 3F020000 		.4byte	.LASF170
+ 2072 0c56 09       		.byte	0x9
+ 2073 0c57 87       		.byte	0x87
+ 2074 0c58 22070000 		.4byte	0x722
+ 2075 0c5c 1F       		.uleb128 0x1f
+ 2076 0c5d EC050000 		.4byte	.LASF171
+ 2077 0c61 EC050000 		.4byte	.LASF171
+ 2078 0c65 0A       		.byte	0xa
+ 2079 0c66 BF       		.byte	0xbf
+ 2080 0c67 1F       		.uleb128 0x1f
+ 2081 0c68 00000000 		.4byte	.LASF172
+ 2082 0c6c 00000000 		.4byte	.LASF172
+ 2083 0c70 0A       		.byte	0xa
+ 2084 0c71 BB       		.byte	0xbb
+ 2085 0c72 20       		.uleb128 0x20
+ 2086 0c73 A2050000 		.4byte	.LASF179
+ 2087 0c77 7E020000 		.4byte	.LASF180
+ 2088 0c7b 0C       		.byte	0xc
+ 2089 0c7c 00       		.byte	0
+ 2090 0c7d A2050000 		.4byte	.LASF179
+ 2091 0c81 1F       		.uleb128 0x1f
+ 2092 0c82 8B000000 		.4byte	.LASF173
+ 2093 0c86 8B000000 		.4byte	.LASF173
+ 2094 0c8a 0B       		.byte	0xb
+ 2095 0c8b 28       		.byte	0x28
+ 2096 0c8c 00       		.byte	0
+ 2097              		.section	.debug_abbrev,"",%progbits
+ 2098              	.Ldebug_abbrev0:
+ 2099 0000 01       		.uleb128 0x1
+ 2100 0001 11       		.uleb128 0x11
+ 2101 0002 01       		.byte	0x1
+ 2102 0003 25       		.uleb128 0x25
+ 2103 0004 0E       		.uleb128 0xe
+ 2104 0005 13       		.uleb128 0x13
+ 2105 0006 0B       		.uleb128 0xb
+ 2106 0007 03       		.uleb128 0x3
+ 2107 0008 0E       		.uleb128 0xe
+ 2108 0009 1B       		.uleb128 0x1b
+ 2109 000a 0E       		.uleb128 0xe
+ 2110 000b 55       		.uleb128 0x55
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 41
+
+
+ 2111 000c 17       		.uleb128 0x17
+ 2112 000d 11       		.uleb128 0x11
+ 2113 000e 01       		.uleb128 0x1
+ 2114 000f 10       		.uleb128 0x10
+ 2115 0010 17       		.uleb128 0x17
+ 2116 0011 00       		.byte	0
+ 2117 0012 00       		.byte	0
+ 2118 0013 02       		.uleb128 0x2
+ 2119 0014 24       		.uleb128 0x24
+ 2120 0015 00       		.byte	0
+ 2121 0016 0B       		.uleb128 0xb
+ 2122 0017 0B       		.uleb128 0xb
+ 2123 0018 3E       		.uleb128 0x3e
+ 2124 0019 0B       		.uleb128 0xb
+ 2125 001a 03       		.uleb128 0x3
+ 2126 001b 0E       		.uleb128 0xe
+ 2127 001c 00       		.byte	0
+ 2128 001d 00       		.byte	0
+ 2129 001e 03       		.uleb128 0x3
+ 2130 001f 16       		.uleb128 0x16
+ 2131 0020 00       		.byte	0
+ 2132 0021 03       		.uleb128 0x3
+ 2133 0022 0E       		.uleb128 0xe
+ 2134 0023 3A       		.uleb128 0x3a
+ 2135 0024 0B       		.uleb128 0xb
+ 2136 0025 3B       		.uleb128 0x3b
+ 2137 0026 0B       		.uleb128 0xb
+ 2138 0027 49       		.uleb128 0x49
+ 2139 0028 13       		.uleb128 0x13
+ 2140 0029 00       		.byte	0
+ 2141 002a 00       		.byte	0
+ 2142 002b 04       		.uleb128 0x4
+ 2143 002c 24       		.uleb128 0x24
+ 2144 002d 00       		.byte	0
+ 2145 002e 0B       		.uleb128 0xb
+ 2146 002f 0B       		.uleb128 0xb
+ 2147 0030 3E       		.uleb128 0x3e
+ 2148 0031 0B       		.uleb128 0xb
+ 2149 0032 03       		.uleb128 0x3
+ 2150 0033 08       		.uleb128 0x8
+ 2151 0034 00       		.byte	0
+ 2152 0035 00       		.byte	0
+ 2153 0036 05       		.uleb128 0x5
+ 2154 0037 35       		.uleb128 0x35
+ 2155 0038 00       		.byte	0
+ 2156 0039 49       		.uleb128 0x49
+ 2157 003a 13       		.uleb128 0x13
+ 2158 003b 00       		.byte	0
+ 2159 003c 00       		.byte	0
+ 2160 003d 06       		.uleb128 0x6
+ 2161 003e 13       		.uleb128 0x13
+ 2162 003f 01       		.byte	0x1
+ 2163 0040 0B       		.uleb128 0xb
+ 2164 0041 0B       		.uleb128 0xb
+ 2165 0042 3A       		.uleb128 0x3a
+ 2166 0043 0B       		.uleb128 0xb
+ 2167 0044 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 42
+
+
+ 2168 0045 0B       		.uleb128 0xb
+ 2169 0046 01       		.uleb128 0x1
+ 2170 0047 13       		.uleb128 0x13
+ 2171 0048 00       		.byte	0
+ 2172 0049 00       		.byte	0
+ 2173 004a 07       		.uleb128 0x7
+ 2174 004b 0D       		.uleb128 0xd
+ 2175 004c 00       		.byte	0
+ 2176 004d 03       		.uleb128 0x3
+ 2177 004e 0E       		.uleb128 0xe
+ 2178 004f 3A       		.uleb128 0x3a
+ 2179 0050 0B       		.uleb128 0xb
+ 2180 0051 3B       		.uleb128 0x3b
+ 2181 0052 0B       		.uleb128 0xb
+ 2182 0053 49       		.uleb128 0x49
+ 2183 0054 13       		.uleb128 0x13
+ 2184 0055 38       		.uleb128 0x38
+ 2185 0056 0B       		.uleb128 0xb
+ 2186 0057 00       		.byte	0
+ 2187 0058 00       		.byte	0
+ 2188 0059 08       		.uleb128 0x8
+ 2189 005a 0F       		.uleb128 0xf
+ 2190 005b 00       		.byte	0
+ 2191 005c 0B       		.uleb128 0xb
+ 2192 005d 0B       		.uleb128 0xb
+ 2193 005e 00       		.byte	0
+ 2194 005f 00       		.byte	0
+ 2195 0060 09       		.uleb128 0x9
+ 2196 0061 04       		.uleb128 0x4
+ 2197 0062 01       		.byte	0x1
+ 2198 0063 0B       		.uleb128 0xb
+ 2199 0064 0B       		.uleb128 0xb
+ 2200 0065 49       		.uleb128 0x49
+ 2201 0066 13       		.uleb128 0x13
+ 2202 0067 3A       		.uleb128 0x3a
+ 2203 0068 0B       		.uleb128 0xb
+ 2204 0069 3B       		.uleb128 0x3b
+ 2205 006a 05       		.uleb128 0x5
+ 2206 006b 01       		.uleb128 0x1
+ 2207 006c 13       		.uleb128 0x13
+ 2208 006d 00       		.byte	0
+ 2209 006e 00       		.byte	0
+ 2210 006f 0A       		.uleb128 0xa
+ 2211 0070 28       		.uleb128 0x28
+ 2212 0071 00       		.byte	0
+ 2213 0072 03       		.uleb128 0x3
+ 2214 0073 0E       		.uleb128 0xe
+ 2215 0074 1C       		.uleb128 0x1c
+ 2216 0075 0B       		.uleb128 0xb
+ 2217 0076 00       		.byte	0
+ 2218 0077 00       		.byte	0
+ 2219 0078 0B       		.uleb128 0xb
+ 2220 0079 16       		.uleb128 0x16
+ 2221 007a 00       		.byte	0
+ 2222 007b 03       		.uleb128 0x3
+ 2223 007c 0E       		.uleb128 0xe
+ 2224 007d 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 43
+
+
+ 2225 007e 0B       		.uleb128 0xb
+ 2226 007f 3B       		.uleb128 0x3b
+ 2227 0080 05       		.uleb128 0x5
+ 2228 0081 49       		.uleb128 0x49
+ 2229 0082 13       		.uleb128 0x13
+ 2230 0083 00       		.byte	0
+ 2231 0084 00       		.byte	0
+ 2232 0085 0C       		.uleb128 0xc
+ 2233 0086 13       		.uleb128 0x13
+ 2234 0087 01       		.byte	0x1
+ 2235 0088 0B       		.uleb128 0xb
+ 2236 0089 0B       		.uleb128 0xb
+ 2237 008a 3A       		.uleb128 0x3a
+ 2238 008b 0B       		.uleb128 0xb
+ 2239 008c 3B       		.uleb128 0x3b
+ 2240 008d 05       		.uleb128 0x5
+ 2241 008e 01       		.uleb128 0x1
+ 2242 008f 13       		.uleb128 0x13
+ 2243 0090 00       		.byte	0
+ 2244 0091 00       		.byte	0
+ 2245 0092 0D       		.uleb128 0xd
+ 2246 0093 0D       		.uleb128 0xd
+ 2247 0094 00       		.byte	0
+ 2248 0095 03       		.uleb128 0x3
+ 2249 0096 0E       		.uleb128 0xe
+ 2250 0097 3A       		.uleb128 0x3a
+ 2251 0098 0B       		.uleb128 0xb
+ 2252 0099 3B       		.uleb128 0x3b
+ 2253 009a 05       		.uleb128 0x5
+ 2254 009b 49       		.uleb128 0x49
+ 2255 009c 13       		.uleb128 0x13
+ 2256 009d 38       		.uleb128 0x38
+ 2257 009e 0B       		.uleb128 0xb
+ 2258 009f 00       		.byte	0
+ 2259 00a0 00       		.byte	0
+ 2260 00a1 0E       		.uleb128 0xe
+ 2261 00a2 01       		.uleb128 0x1
+ 2262 00a3 01       		.byte	0x1
+ 2263 00a4 49       		.uleb128 0x49
+ 2264 00a5 13       		.uleb128 0x13
+ 2265 00a6 01       		.uleb128 0x1
+ 2266 00a7 13       		.uleb128 0x13
+ 2267 00a8 00       		.byte	0
+ 2268 00a9 00       		.byte	0
+ 2269 00aa 0F       		.uleb128 0xf
+ 2270 00ab 21       		.uleb128 0x21
+ 2271 00ac 00       		.byte	0
+ 2272 00ad 49       		.uleb128 0x49
+ 2273 00ae 13       		.uleb128 0x13
+ 2274 00af 2F       		.uleb128 0x2f
+ 2275 00b0 0B       		.uleb128 0xb
+ 2276 00b1 00       		.byte	0
+ 2277 00b2 00       		.byte	0
+ 2278 00b3 10       		.uleb128 0x10
+ 2279 00b4 0F       		.uleb128 0xf
+ 2280 00b5 00       		.byte	0
+ 2281 00b6 0B       		.uleb128 0xb
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 44
+
+
+ 2282 00b7 0B       		.uleb128 0xb
+ 2283 00b8 49       		.uleb128 0x49
+ 2284 00b9 13       		.uleb128 0x13
+ 2285 00ba 00       		.byte	0
+ 2286 00bb 00       		.byte	0
+ 2287 00bc 11       		.uleb128 0x11
+ 2288 00bd 15       		.uleb128 0x15
+ 2289 00be 01       		.byte	0x1
+ 2290 00bf 27       		.uleb128 0x27
+ 2291 00c0 19       		.uleb128 0x19
+ 2292 00c1 01       		.uleb128 0x1
+ 2293 00c2 13       		.uleb128 0x13
+ 2294 00c3 00       		.byte	0
+ 2295 00c4 00       		.byte	0
+ 2296 00c5 12       		.uleb128 0x12
+ 2297 00c6 05       		.uleb128 0x5
+ 2298 00c7 00       		.byte	0
+ 2299 00c8 49       		.uleb128 0x49
+ 2300 00c9 13       		.uleb128 0x13
+ 2301 00ca 00       		.byte	0
+ 2302 00cb 00       		.byte	0
+ 2303 00cc 13       		.uleb128 0x13
+ 2304 00cd 13       		.uleb128 0x13
+ 2305 00ce 01       		.byte	0x1
+ 2306 00cf 03       		.uleb128 0x3
+ 2307 00d0 0E       		.uleb128 0xe
+ 2308 00d1 0B       		.uleb128 0xb
+ 2309 00d2 0B       		.uleb128 0xb
+ 2310 00d3 3A       		.uleb128 0x3a
+ 2311 00d4 0B       		.uleb128 0xb
+ 2312 00d5 3B       		.uleb128 0x3b
+ 2313 00d6 05       		.uleb128 0x5
+ 2314 00d7 01       		.uleb128 0x1
+ 2315 00d8 13       		.uleb128 0x13
+ 2316 00d9 00       		.byte	0
+ 2317 00da 00       		.byte	0
+ 2318 00db 14       		.uleb128 0x14
+ 2319 00dc 26       		.uleb128 0x26
+ 2320 00dd 00       		.byte	0
+ 2321 00de 49       		.uleb128 0x49
+ 2322 00df 13       		.uleb128 0x13
+ 2323 00e0 00       		.byte	0
+ 2324 00e1 00       		.byte	0
+ 2325 00e2 15       		.uleb128 0x15
+ 2326 00e3 2E       		.uleb128 0x2e
+ 2327 00e4 01       		.byte	0x1
+ 2328 00e5 3F       		.uleb128 0x3f
+ 2329 00e6 19       		.uleb128 0x19
+ 2330 00e7 03       		.uleb128 0x3
+ 2331 00e8 0E       		.uleb128 0xe
+ 2332 00e9 3A       		.uleb128 0x3a
+ 2333 00ea 0B       		.uleb128 0xb
+ 2334 00eb 3B       		.uleb128 0x3b
+ 2335 00ec 0B       		.uleb128 0xb
+ 2336 00ed 27       		.uleb128 0x27
+ 2337 00ee 19       		.uleb128 0x19
+ 2338 00ef 11       		.uleb128 0x11
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 45
+
+
+ 2339 00f0 01       		.uleb128 0x1
+ 2340 00f1 12       		.uleb128 0x12
+ 2341 00f2 06       		.uleb128 0x6
+ 2342 00f3 40       		.uleb128 0x40
+ 2343 00f4 18       		.uleb128 0x18
+ 2344 00f5 9742     		.uleb128 0x2117
+ 2345 00f7 19       		.uleb128 0x19
+ 2346 00f8 01       		.uleb128 0x1
+ 2347 00f9 13       		.uleb128 0x13
+ 2348 00fa 00       		.byte	0
+ 2349 00fb 00       		.byte	0
+ 2350 00fc 16       		.uleb128 0x16
+ 2351 00fd 05       		.uleb128 0x5
+ 2352 00fe 00       		.byte	0
+ 2353 00ff 03       		.uleb128 0x3
+ 2354 0100 08       		.uleb128 0x8
+ 2355 0101 3A       		.uleb128 0x3a
+ 2356 0102 0B       		.uleb128 0xb
+ 2357 0103 3B       		.uleb128 0x3b
+ 2358 0104 0B       		.uleb128 0xb
+ 2359 0105 49       		.uleb128 0x49
+ 2360 0106 13       		.uleb128 0x13
+ 2361 0107 02       		.uleb128 0x2
+ 2362 0108 17       		.uleb128 0x17
+ 2363 0109 00       		.byte	0
+ 2364 010a 00       		.byte	0
+ 2365 010b 17       		.uleb128 0x17
+ 2366 010c 05       		.uleb128 0x5
+ 2367 010d 00       		.byte	0
+ 2368 010e 03       		.uleb128 0x3
+ 2369 010f 0E       		.uleb128 0xe
+ 2370 0110 3A       		.uleb128 0x3a
+ 2371 0111 0B       		.uleb128 0xb
+ 2372 0112 3B       		.uleb128 0x3b
+ 2373 0113 0B       		.uleb128 0xb
+ 2374 0114 49       		.uleb128 0x49
+ 2375 0115 13       		.uleb128 0x13
+ 2376 0116 02       		.uleb128 0x2
+ 2377 0117 17       		.uleb128 0x17
+ 2378 0118 00       		.byte	0
+ 2379 0119 00       		.byte	0
+ 2380 011a 18       		.uleb128 0x18
+ 2381 011b 0B       		.uleb128 0xb
+ 2382 011c 01       		.byte	0x1
+ 2383 011d 11       		.uleb128 0x11
+ 2384 011e 01       		.uleb128 0x1
+ 2385 011f 12       		.uleb128 0x12
+ 2386 0120 06       		.uleb128 0x6
+ 2387 0121 01       		.uleb128 0x1
+ 2388 0122 13       		.uleb128 0x13
+ 2389 0123 00       		.byte	0
+ 2390 0124 00       		.byte	0
+ 2391 0125 19       		.uleb128 0x19
+ 2392 0126 34       		.uleb128 0x34
+ 2393 0127 00       		.byte	0
+ 2394 0128 03       		.uleb128 0x3
+ 2395 0129 0E       		.uleb128 0xe
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 46
+
+
+ 2396 012a 3A       		.uleb128 0x3a
+ 2397 012b 0B       		.uleb128 0xb
+ 2398 012c 3B       		.uleb128 0x3b
+ 2399 012d 0B       		.uleb128 0xb
+ 2400 012e 49       		.uleb128 0x49
+ 2401 012f 13       		.uleb128 0x13
+ 2402 0130 02       		.uleb128 0x2
+ 2403 0131 18       		.uleb128 0x18
+ 2404 0132 00       		.byte	0
+ 2405 0133 00       		.byte	0
+ 2406 0134 1A       		.uleb128 0x1a
+ 2407 0135 898201   		.uleb128 0x4109
+ 2408 0138 01       		.byte	0x1
+ 2409 0139 11       		.uleb128 0x11
+ 2410 013a 01       		.uleb128 0x1
+ 2411 013b 31       		.uleb128 0x31
+ 2412 013c 13       		.uleb128 0x13
+ 2413 013d 01       		.uleb128 0x1
+ 2414 013e 13       		.uleb128 0x13
+ 2415 013f 00       		.byte	0
+ 2416 0140 00       		.byte	0
+ 2417 0141 1B       		.uleb128 0x1b
+ 2418 0142 8A8201   		.uleb128 0x410a
+ 2419 0145 00       		.byte	0
+ 2420 0146 02       		.uleb128 0x2
+ 2421 0147 18       		.uleb128 0x18
+ 2422 0148 9142     		.uleb128 0x2111
+ 2423 014a 18       		.uleb128 0x18
+ 2424 014b 00       		.byte	0
+ 2425 014c 00       		.byte	0
+ 2426 014d 1C       		.uleb128 0x1c
+ 2427 014e 898201   		.uleb128 0x4109
+ 2428 0151 01       		.byte	0x1
+ 2429 0152 11       		.uleb128 0x11
+ 2430 0153 01       		.uleb128 0x1
+ 2431 0154 31       		.uleb128 0x31
+ 2432 0155 13       		.uleb128 0x13
+ 2433 0156 00       		.byte	0
+ 2434 0157 00       		.byte	0
+ 2435 0158 1D       		.uleb128 0x1d
+ 2436 0159 34       		.uleb128 0x34
+ 2437 015a 00       		.byte	0
+ 2438 015b 03       		.uleb128 0x3
+ 2439 015c 0E       		.uleb128 0xe
+ 2440 015d 3A       		.uleb128 0x3a
+ 2441 015e 0B       		.uleb128 0xb
+ 2442 015f 3B       		.uleb128 0x3b
+ 2443 0160 05       		.uleb128 0x5
+ 2444 0161 49       		.uleb128 0x49
+ 2445 0162 13       		.uleb128 0x13
+ 2446 0163 3F       		.uleb128 0x3f
+ 2447 0164 19       		.uleb128 0x19
+ 2448 0165 3C       		.uleb128 0x3c
+ 2449 0166 19       		.uleb128 0x19
+ 2450 0167 00       		.byte	0
+ 2451 0168 00       		.byte	0
+ 2452 0169 1E       		.uleb128 0x1e
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 47
+
+
+ 2453 016a 34       		.uleb128 0x34
+ 2454 016b 00       		.byte	0
+ 2455 016c 03       		.uleb128 0x3
+ 2456 016d 0E       		.uleb128 0xe
+ 2457 016e 3A       		.uleb128 0x3a
+ 2458 016f 0B       		.uleb128 0xb
+ 2459 0170 3B       		.uleb128 0x3b
+ 2460 0171 0B       		.uleb128 0xb
+ 2461 0172 49       		.uleb128 0x49
+ 2462 0173 13       		.uleb128 0x13
+ 2463 0174 3F       		.uleb128 0x3f
+ 2464 0175 19       		.uleb128 0x19
+ 2465 0176 3C       		.uleb128 0x3c
+ 2466 0177 19       		.uleb128 0x19
+ 2467 0178 00       		.byte	0
+ 2468 0179 00       		.byte	0
+ 2469 017a 1F       		.uleb128 0x1f
+ 2470 017b 2E       		.uleb128 0x2e
+ 2471 017c 00       		.byte	0
+ 2472 017d 3F       		.uleb128 0x3f
+ 2473 017e 19       		.uleb128 0x19
+ 2474 017f 3C       		.uleb128 0x3c
+ 2475 0180 19       		.uleb128 0x19
+ 2476 0181 6E       		.uleb128 0x6e
+ 2477 0182 0E       		.uleb128 0xe
+ 2478 0183 03       		.uleb128 0x3
+ 2479 0184 0E       		.uleb128 0xe
+ 2480 0185 3A       		.uleb128 0x3a
+ 2481 0186 0B       		.uleb128 0xb
+ 2482 0187 3B       		.uleb128 0x3b
+ 2483 0188 0B       		.uleb128 0xb
+ 2484 0189 00       		.byte	0
+ 2485 018a 00       		.byte	0
+ 2486 018b 20       		.uleb128 0x20
+ 2487 018c 2E       		.uleb128 0x2e
+ 2488 018d 00       		.byte	0
+ 2489 018e 3F       		.uleb128 0x3f
+ 2490 018f 19       		.uleb128 0x19
+ 2491 0190 3C       		.uleb128 0x3c
+ 2492 0191 19       		.uleb128 0x19
+ 2493 0192 6E       		.uleb128 0x6e
+ 2494 0193 0E       		.uleb128 0xe
+ 2495 0194 03       		.uleb128 0x3
+ 2496 0195 0E       		.uleb128 0xe
+ 2497 0196 3A       		.uleb128 0x3a
+ 2498 0197 0B       		.uleb128 0xb
+ 2499 0198 3B       		.uleb128 0x3b
+ 2500 0199 0B       		.uleb128 0xb
+ 2501 019a 6E       		.uleb128 0x6e
+ 2502 019b 0E       		.uleb128 0xe
+ 2503 019c 00       		.byte	0
+ 2504 019d 00       		.byte	0
+ 2505 019e 00       		.byte	0
+ 2506              		.section	.debug_loc,"",%progbits
+ 2507              	.Ldebug_loc0:
+ 2508              	.LLST0:
+ 2509 0000 00000000 		.4byte	.LVL0
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 48
+
+
+ 2510 0004 11000000 		.4byte	.LVL2-1
+ 2511 0008 0100     		.2byte	0x1
+ 2512 000a 50       		.byte	0x50
+ 2513 000b 11000000 		.4byte	.LVL2-1
+ 2514 000f 96010000 		.4byte	.LVL39
+ 2515 0013 0100     		.2byte	0x1
+ 2516 0015 54       		.byte	0x54
+ 2517 0016 96010000 		.4byte	.LVL39
+ 2518 001a F8010000 		.4byte	.LFE637
+ 2519 001e 0400     		.2byte	0x4
+ 2520 0020 F3       		.byte	0xf3
+ 2521 0021 01       		.uleb128 0x1
+ 2522 0022 50       		.byte	0x50
+ 2523 0023 9F       		.byte	0x9f
+ 2524 0024 00000000 		.4byte	0
+ 2525 0028 00000000 		.4byte	0
+ 2526              	.LLST1:
+ 2527 002c 00000000 		.4byte	.LVL0
+ 2528 0030 0E000000 		.4byte	.LVL1
+ 2529 0034 0100     		.2byte	0x1
+ 2530 0036 51       		.byte	0x51
+ 2531 0037 0E000000 		.4byte	.LVL1
+ 2532 003b 70000000 		.4byte	.LVL12
+ 2533 003f 0100     		.2byte	0x1
+ 2534 0041 55       		.byte	0x55
+ 2535 0042 70000000 		.4byte	.LVL12
+ 2536 0046 92000000 		.4byte	.LVL16
+ 2537 004a 0400     		.2byte	0x4
+ 2538 004c F3       		.byte	0xf3
+ 2539 004d 01       		.uleb128 0x1
+ 2540 004e 51       		.byte	0x51
+ 2541 004f 9F       		.byte	0x9f
+ 2542 0050 92000000 		.4byte	.LVL16
+ 2543 0054 BC000000 		.4byte	.LVL21
+ 2544 0058 0100     		.2byte	0x1
+ 2545 005a 55       		.byte	0x55
+ 2546 005b BC000000 		.4byte	.LVL21
+ 2547 005f E0000000 		.4byte	.LVL25
+ 2548 0063 0400     		.2byte	0x4
+ 2549 0065 F3       		.byte	0xf3
+ 2550 0066 01       		.uleb128 0x1
+ 2551 0067 51       		.byte	0x51
+ 2552 0068 9F       		.byte	0x9f
+ 2553 0069 E0000000 		.4byte	.LVL25
+ 2554 006d EC000000 		.4byte	.LVL27
+ 2555 0071 0100     		.2byte	0x1
+ 2556 0073 55       		.byte	0x55
+ 2557 0074 EC000000 		.4byte	.LVL27
+ 2558 0078 42010000 		.4byte	.LVL32
+ 2559 007c 0400     		.2byte	0x4
+ 2560 007e F3       		.byte	0xf3
+ 2561 007f 01       		.uleb128 0x1
+ 2562 0080 51       		.byte	0x51
+ 2563 0081 9F       		.byte	0x9f
+ 2564 0082 42010000 		.4byte	.LVL32
+ 2565 0086 4E010000 		.4byte	.LVL34
+ 2566 008a 0100     		.2byte	0x1
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 49
+
+
+ 2567 008c 55       		.byte	0x55
+ 2568 008d 4E010000 		.4byte	.LVL34
+ 2569 0091 F8010000 		.4byte	.LFE637
+ 2570 0095 0400     		.2byte	0x4
+ 2571 0097 F3       		.byte	0xf3
+ 2572 0098 01       		.uleb128 0x1
+ 2573 0099 51       		.byte	0x51
+ 2574 009a 9F       		.byte	0x9f
+ 2575 009b 00000000 		.4byte	0
+ 2576 009f 00000000 		.4byte	0
+ 2577              	.LLST2:
+ 2578 00a3 00000000 		.4byte	.LVL0
+ 2579 00a7 11000000 		.4byte	.LVL2-1
+ 2580 00ab 0100     		.2byte	0x1
+ 2581 00ad 52       		.byte	0x52
+ 2582 00ae 11000000 		.4byte	.LVL2-1
+ 2583 00b2 96010000 		.4byte	.LVL39
+ 2584 00b6 0100     		.2byte	0x1
+ 2585 00b8 56       		.byte	0x56
+ 2586 00b9 96010000 		.4byte	.LVL39
+ 2587 00bd F8010000 		.4byte	.LFE637
+ 2588 00c1 0400     		.2byte	0x4
+ 2589 00c3 F3       		.byte	0xf3
+ 2590 00c4 01       		.uleb128 0x1
+ 2591 00c5 52       		.byte	0x52
+ 2592 00c6 9F       		.byte	0x9f
+ 2593 00c7 00000000 		.4byte	0
+ 2594 00cb 00000000 		.4byte	0
+ 2595              	.LLST3:
+ 2596 00cf 00000000 		.4byte	.LVL0
+ 2597 00d3 11000000 		.4byte	.LVL2-1
+ 2598 00d7 0100     		.2byte	0x1
+ 2599 00d9 53       		.byte	0x53
+ 2600 00da 11000000 		.4byte	.LVL2-1
+ 2601 00de 96010000 		.4byte	.LVL39
+ 2602 00e2 0100     		.2byte	0x1
+ 2603 00e4 57       		.byte	0x57
+ 2604 00e5 96010000 		.4byte	.LVL39
+ 2605 00e9 F8010000 		.4byte	.LFE637
+ 2606 00ed 0400     		.2byte	0x4
+ 2607 00ef F3       		.byte	0xf3
+ 2608 00f0 01       		.uleb128 0x1
+ 2609 00f1 53       		.byte	0x53
+ 2610 00f2 9F       		.byte	0x9f
+ 2611 00f3 00000000 		.4byte	0
+ 2612 00f7 00000000 		.4byte	0
+ 2613              	.LLST4:
+ 2614 00fb 00000000 		.4byte	.LVL0
+ 2615 00ff 96010000 		.4byte	.LVL39
+ 2616 0103 0200     		.2byte	0x2
+ 2617 0105 91       		.byte	0x91
+ 2618 0106 00       		.sleb128 0
+ 2619 0107 96010000 		.4byte	.LVL39
+ 2620 010b F8010000 		.4byte	.LFE637
+ 2621 010f 0200     		.2byte	0x2
+ 2622 0111 7D       		.byte	0x7d
+ 2623 0112 00       		.sleb128 0
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 50
+
+
+ 2624 0113 00000000 		.4byte	0
+ 2625 0117 00000000 		.4byte	0
+ 2626              	.LLST5:
+ 2627 011b 00000000 		.4byte	.LVL0
+ 2628 011f 96010000 		.4byte	.LVL39
+ 2629 0123 0200     		.2byte	0x2
+ 2630 0125 91       		.byte	0x91
+ 2631 0126 04       		.sleb128 4
+ 2632 0127 96010000 		.4byte	.LVL39
+ 2633 012b F8010000 		.4byte	.LFE637
+ 2634 012f 0200     		.2byte	0x2
+ 2635 0131 7D       		.byte	0x7d
+ 2636 0132 04       		.sleb128 4
+ 2637 0133 00000000 		.4byte	0
+ 2638 0137 00000000 		.4byte	0
+ 2639              	.LLST6:
+ 2640 013b 00000000 		.4byte	.LVL0
+ 2641 013f 96010000 		.4byte	.LVL39
+ 2642 0143 0200     		.2byte	0x2
+ 2643 0145 91       		.byte	0x91
+ 2644 0146 08       		.sleb128 8
+ 2645 0147 96010000 		.4byte	.LVL39
+ 2646 014b F8010000 		.4byte	.LFE637
+ 2647 014f 0200     		.2byte	0x2
+ 2648 0151 7D       		.byte	0x7d
+ 2649 0152 08       		.sleb128 8
+ 2650 0153 00000000 		.4byte	0
+ 2651 0157 00000000 		.4byte	0
+ 2652              	.LLST7:
+ 2653 015b 00000000 		.4byte	.LVL0
+ 2654 015f 96010000 		.4byte	.LVL39
+ 2655 0163 0200     		.2byte	0x2
+ 2656 0165 91       		.byte	0x91
+ 2657 0166 0C       		.sleb128 12
+ 2658 0167 96010000 		.4byte	.LVL39
+ 2659 016b F8010000 		.4byte	.LFE637
+ 2660 016f 0200     		.2byte	0x2
+ 2661 0171 7D       		.byte	0x7d
+ 2662 0172 0C       		.sleb128 12
+ 2663 0173 00000000 		.4byte	0
+ 2664 0177 00000000 		.4byte	0
+ 2665              		.section	.debug_aranges,"",%progbits
+ 2666 0000 1C000000 		.4byte	0x1c
+ 2667 0004 0200     		.2byte	0x2
+ 2668 0006 00000000 		.4byte	.Ldebug_info0
+ 2669 000a 04       		.byte	0x4
+ 2670 000b 00       		.byte	0
+ 2671 000c 0000     		.2byte	0
+ 2672 000e 0000     		.2byte	0
+ 2673 0010 00000000 		.4byte	.LFB637
+ 2674 0014 F8010000 		.4byte	.LFE637-.LFB637
+ 2675 0018 00000000 		.4byte	0
+ 2676 001c 00000000 		.4byte	0
+ 2677              		.section	.debug_ranges,"",%progbits
+ 2678              	.Ldebug_ranges0:
+ 2679 0000 00000000 		.4byte	.LFB637
+ 2680 0004 F8010000 		.4byte	.LFE637
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 51
+
+
+ 2681 0008 00000000 		.4byte	0
+ 2682 000c 00000000 		.4byte	0
+ 2683              		.section	.debug_line,"",%progbits
+ 2684              	.Ldebug_line0:
+ 2685 0000 46030000 		.section	.debug_str,"MS",%progbits,1
+ 2685      0200DD02 
+ 2685      00000201 
+ 2685      FB0E0D00 
+ 2685      01010101 
+ 2686              	.LASF172:
+ 2687 0000 7072696E 		.ascii	"printf\000"
+ 2687      746600
+ 2688              	.LASF56:
+ 2689 0007 70726F74 		.ascii	"protBusMasterMask\000"
+ 2689      4275734D 
+ 2689      61737465 
+ 2689      724D6173 
+ 2689      6B00
+ 2690              	.LASF141:
+ 2691 0019 72784275 		.ascii	"rxBufSize\000"
+ 2691      6653697A 
+ 2691      6500
+ 2692              	.LASF66:
+ 2693 0023 666C6173 		.ascii	"flashCtlMainWs3Freq\000"
+ 2693      6843746C 
+ 2693      4D61696E 
+ 2693      57733346 
+ 2693      72657100 
+ 2694              	.LASF88:
+ 2695 0037 6770696F 		.ascii	"gpioPrtCfgInOffset\000"
+ 2695      50727443 
+ 2695      6667496E 
+ 2695      4F666673 
+ 2695      657400
+ 2696              	.LASF106:
+ 2697 004a 6970634C 		.ascii	"ipcLockStatusOffset\000"
+ 2697      6F636B53 
+ 2697      74617475 
+ 2697      734F6666 
+ 2697      73657400 
+ 2698              	.LASF50:
+ 2699 005e 70657269 		.ascii	"periClockNr\000"
+ 2699      436C6F63 
+ 2699      6B4E7200 
+ 2700              	.LASF28:
+ 2701 006a 70617373 		.ascii	"passBase\000"
+ 2701      42617365 
+ 2701      00
+ 2702              	.LASF41:
+ 2703 0073 63707573 		.ascii	"cpussIpcIrqNr\000"
+ 2703      73497063 
+ 2703      4972714E 
+ 2703      7200
+ 2704              	.LASF3:
+ 2705 0081 5F5F7569 		.ascii	"__uint8_t\000"
+ 2705      6E74385F 
+ 2705      7400
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 52
+
+
+ 2706              	.LASF173:
+ 2707 008b 73747273 		.ascii	"strstr\000"
+ 2707      747200
+ 2708              	.LASF85:
+ 2709 0092 70657269 		.ascii	"periDiv24_5CtlOffset\000"
+ 2709      44697632 
+ 2709      345F3543 
+ 2709      746C4F66 
+ 2709      66736574 
+ 2710              	.LASF92:
+ 2711 00a7 63707573 		.ascii	"cpussCm4ClockCtlOffset\000"
+ 2711      73436D34 
+ 2711      436C6F63 
+ 2711      6B43746C 
+ 2711      4F666673 
+ 2712              	.LASF143:
+ 2713 00be 74784275 		.ascii	"txBuf\000"
+ 2713      6600
+ 2714              	.LASF21:
+ 2715 00c4 63707573 		.ascii	"cpussBase\000"
+ 2715      73426173 
+ 2715      6500
+ 2716              	.LASF70:
+ 2717 00ce 64774368 		.ascii	"dwChCtlPrioPos\000"
+ 2717      43746C50 
+ 2717      72696F50 
+ 2717      6F7300
+ 2718              	.LASF126:
+ 2719 00dd 73617449 		.ascii	"satIntrMask\000"
+ 2719      6E74724D 
+ 2719      61736B00 
+ 2720              	.LASF12:
+ 2721 00e9 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2721      206C6F6E 
+ 2721      6720756E 
+ 2721      7369676E 
+ 2721      65642069 
+ 2722              	.LASF74:
+ 2723 0100 70657269 		.ascii	"periTrCmdOffset\000"
+ 2723      5472436D 
+ 2723      644F6666 
+ 2723      73657400 
+ 2724              	.LASF136:
+ 2725 0110 72785269 		.ascii	"rxRingBuf\000"
+ 2725      6E674275 
+ 2725      6600
+ 2726              	.LASF98:
+ 2727 011a 63707573 		.ascii	"cpussSysTickCtlOffset\000"
+ 2727      73537973 
+ 2727      5469636B 
+ 2727      43746C4F 
+ 2727      66667365 
+ 2728              	.LASF166:
+ 2729 0130 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 2729      52784275 
+ 2729      66666572 
+ 2729      00
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 53
+
+
+ 2730              	.LASF59:
+ 2731 013d 666C6173 		.ascii	"flashPipeRequired\000"
+ 2731      68506970 
+ 2731      65526571 
+ 2731      75697265 
+ 2731      6400
+ 2732              	.LASF63:
+ 2733 014f 666C6173 		.ascii	"flashCtlMainWs0Freq\000"
+ 2733      6843746C 
+ 2733      4D61696E 
+ 2733      57733046 
+ 2733      72657100 
+ 2734              	.LASF15:
+ 2735 0163 696E7431 		.ascii	"int16_t\000"
+ 2735      365F7400 
+ 2736              	.LASF132:
+ 2737 016b 63795F73 		.ascii	"cy_stc_sar_config_t\000"
+ 2737      74635F73 
+ 2737      61725F63 
+ 2737      6F6E6669 
+ 2737      675F7400 
+ 2738              	.LASF11:
+ 2739 017f 6C6F6E67 		.ascii	"long long int\000"
+ 2739      206C6F6E 
+ 2739      6720696E 
+ 2739      7400
+ 2740              	.LASF1:
+ 2741 018d 7369676E 		.ascii	"signed char\000"
+ 2741      65642063 
+ 2741      68617200 
+ 2742              	.LASF79:
+ 2743 0199 70657269 		.ascii	"periDivCmdTypeSelPos\000"
+ 2743      44697643 
+ 2743      6D645479 
+ 2743      70655365 
+ 2743      6C506F73 
+ 2744              	.LASF116:
+ 2745 01ae 63795F65 		.ascii	"cy_en_sar_range_detect_condition_t\000"
+ 2745      6E5F7361 
+ 2745      725F7261 
+ 2745      6E67655F 
+ 2745      64657465 
+ 2746              	.LASF153:
+ 2747 01d1 636C6B44 		.ascii	"clkDivider\000"
+ 2747      69766964 
+ 2747      657200
+ 2748              	.LASF25:
+ 2749 01dc 70726F74 		.ascii	"protBase\000"
+ 2749      42617365 
+ 2749      00
+ 2750              	.LASF37:
+ 2751 01e5 69706356 		.ascii	"ipcVersion\000"
+ 2751      65727369 
+ 2751      6F6E00
+ 2752              	.LASF99:
+ 2753 01f0 63707573 		.ascii	"cpussCm0NmiCtlOffset\000"
+ 2753      73436D30 
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 54
+
+
+ 2753      4E6D6943 
+ 2753      746C4F66 
+ 2753      66736574 
+ 2754              	.LASF47:
+ 2755 0205 73727373 		.ascii	"srssNumClkpath\000"
+ 2755      4E756D43 
+ 2755      6C6B7061 
+ 2755      746800
+ 2756              	.LASF26:
+ 2757 0214 6873696F 		.ascii	"hsiomBase\000"
+ 2757      6D426173 
+ 2757      6500
+ 2758              	.LASF112:
+ 2759 021e 43595F53 		.ascii	"CY_SAR_RANGE_COND_BELOW\000"
+ 2759      41525F52 
+ 2759      414E4745 
+ 2759      5F434F4E 
+ 2759      445F4245 
+ 2760              	.LASF8:
+ 2761 0236 6C6F6E67 		.ascii	"long int\000"
+ 2761      20696E74 
+ 2761      00
+ 2762              	.LASF170:
+ 2763 023f 55415254 		.ascii	"UART_1_context\000"
+ 2763      5F315F63 
+ 2763      6F6E7465 
+ 2763      787400
+ 2764              	.LASF89:
+ 2765 024e 6770696F 		.ascii	"gpioPrtCfgOutOffset\000"
+ 2765      50727443 
+ 2765      66674F75 
+ 2765      744F6666 
+ 2765      73657400 
+ 2766              	.LASF156:
+ 2767 0262 74726967 		.ascii	"trigger_level\000"
+ 2767      6765725F 
+ 2767      6C657665 
+ 2767      6C00
+ 2768              	.LASF57:
+ 2769 0270 63727970 		.ascii	"cryptoMemSize\000"
+ 2769      746F4D65 
+ 2769      6D53697A 
+ 2769      6500
+ 2770              	.LASF180:
+ 2771 027e 5F5F6275 		.ascii	"__builtin_puts\000"
+ 2771      696C7469 
+ 2771      6E5F7075 
+ 2771      747300
+ 2772              	.LASF23:
+ 2773 028d 70657269 		.ascii	"periBase\000"
+ 2773      42617365 
+ 2773      00
+ 2774              	.LASF55:
+ 2775 0296 73797350 		.ascii	"sysPmSimoPresent\000"
+ 2775      6D53696D 
+ 2775      6F507265 
+ 2775      73656E74 
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 55
+
+
+ 2775      00
+ 2776              	.LASF114:
+ 2777 02a7 43595F53 		.ascii	"CY_SAR_RANGE_COND_ABOVE\000"
+ 2777      41525F52 
+ 2777      414E4745 
+ 2777      5F434F4E 
+ 2777      445F4142 
+ 2778              	.LASF45:
+ 2779 02bf 63707573 		.ascii	"cpussFmIrq\000"
+ 2779      73466D49 
+ 2779      727100
+ 2780              	.LASF110:
+ 2781 02ca 646F7562 		.ascii	"double\000"
+ 2781      6C6500
+ 2782              	.LASF84:
+ 2783 02d1 70657269 		.ascii	"periDiv16_5CtlOffset\000"
+ 2783      44697631 
+ 2783      365F3543 
+ 2783      746C4F66 
+ 2783      66736574 
+ 2784              	.LASF48:
+ 2785 02e6 73727373 		.ascii	"srssNumPll\000"
+ 2785      4E756D50 
+ 2785      6C6C00
+ 2786              	.LASF119:
+ 2787 02f1 73616D70 		.ascii	"sampleTime01\000"
+ 2787      6C655469 
+ 2787      6D653031 
+ 2787      00
+ 2788              	.LASF6:
+ 2789 02fe 73686F72 		.ascii	"short unsigned int\000"
+ 2789      7420756E 
+ 2789      7369676E 
+ 2789      65642069 
+ 2789      6E7400
+ 2790              	.LASF32:
+ 2791 0311 63727970 		.ascii	"cryptoVersion\000"
+ 2791      746F5665 
+ 2791      7273696F 
+ 2791      6E00
+ 2792              	.LASF158:
+ 2793 031f 74726967 		.ascii	"trigger_channel\000"
+ 2793      6765725F 
+ 2793      6368616E 
+ 2793      6E656C00 
+ 2794              	.LASF22:
+ 2795 032f 666C6173 		.ascii	"flashcBase\000"
+ 2795      68634261 
+ 2795      736500
+ 2796              	.LASF9:
+ 2797 033a 5F5F7569 		.ascii	"__uint32_t\000"
+ 2797      6E743332 
+ 2797      5F7400
+ 2798              	.LASF52:
+ 2799 0345 70617373 		.ascii	"passSarChannels\000"
+ 2799      53617243 
+ 2799      68616E6E 
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 56
+
+
+ 2799      656C7300 
+ 2800              	.LASF151:
+ 2801 0355 6877436F 		.ascii	"hwConfigStc\000"
+ 2801      6E666967 
+ 2801      53746300 
+ 2802              	.LASF4:
+ 2803 0361 5F5F696E 		.ascii	"__int16_t\000"
+ 2803      7431365F 
+ 2803      7400
+ 2804              	.LASF142:
+ 2805 036b 72784275 		.ascii	"rxBufIdx\000"
+ 2805      66496478 
+ 2805      00
+ 2806              	.LASF54:
+ 2807 0374 75646250 		.ascii	"udbPresent\000"
+ 2807      72657365 
+ 2807      6E7400
+ 2808              	.LASF95:
+ 2809 037f 63707573 		.ascii	"cpussCm4PwrCtlOffset\000"
+ 2809      73436D34 
+ 2809      50777243 
+ 2809      746C4F66 
+ 2809      66736574 
+ 2810              	.LASF144:
+ 2811 0394 74784275 		.ascii	"txBufSize\000"
+ 2811      6653697A 
+ 2811      6500
+ 2812              	.LASF90:
+ 2813 039e 6770696F 		.ascii	"gpioPrtCfgSioOffset\000"
+ 2813      50727443 
+ 2813      66675369 
+ 2813      6F4F6666 
+ 2813      73657400 
+ 2814              	.LASF42:
+ 2815 03b2 63707573 		.ascii	"cpussDwChNr\000"
+ 2815      73447743 
+ 2815      684E7200 
+ 2816              	.LASF178:
+ 2817 03be 636F6D6D 		.ascii	"command_parser\000"
+ 2817      616E645F 
+ 2817      70617273 
+ 2817      657200
+ 2818              	.LASF13:
+ 2819 03cd 756E7369 		.ascii	"unsigned int\000"
+ 2819      676E6564 
+ 2819      20696E74 
+ 2819      00
+ 2820              	.LASF16:
+ 2821 03da 75696E74 		.ascii	"uint16_t\000"
+ 2821      31365F74 
+ 2821      00
+ 2822              	.LASF75:
+ 2823 03e3 70657269 		.ascii	"periTrCmdGrSelMsk\000"
+ 2823      5472436D 
+ 2823      64477253 
+ 2823      656C4D73 
+ 2823      6B00
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 57
+
+
+ 2824              	.LASF64:
+ 2825 03f5 666C6173 		.ascii	"flashCtlMainWs1Freq\000"
+ 2825      6843746C 
+ 2825      4D61696E 
+ 2825      57733146 
+ 2825      72657100 
+ 2826              	.LASF10:
+ 2827 0409 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2827      20756E73 
+ 2827      69676E65 
+ 2827      6420696E 
+ 2827      7400
+ 2828              	.LASF133:
+ 2829 041b 63795F63 		.ascii	"cy_cb_scb_uart_handle_events_t\000"
+ 2829      625F7363 
+ 2829      625F7561 
+ 2829      72745F68 
+ 2829      616E646C 
+ 2830              	.LASF176:
+ 2831 043a 433A5C55 		.ascii	"C:\\Users\\Ryan Haque\\Documents\\PSoC Creator\\Fin"
+ 2831      73657273 
+ 2831      5C527961 
+ 2831      6E204861 
+ 2831      7175655C 
+ 2832 0468 616C5F70 		.ascii	"al_project_demo.cydsn\000"
+ 2832      726F6A65 
+ 2832      63745F64 
+ 2832      656D6F2E 
+ 2832      63796473 
+ 2833              	.LASF40:
+ 2834 047e 63707573 		.ascii	"cpussIpcNr\000"
+ 2834      73497063 
+ 2834      4E7200
+ 2835              	.LASF27:
+ 2836 0489 6770696F 		.ascii	"gpioBase\000"
+ 2836      42617365 
+ 2836      00
+ 2837              	.LASF65:
+ 2838 0492 666C6173 		.ascii	"flashCtlMainWs2Freq\000"
+ 2838      6843746C 
+ 2838      4D61696E 
+ 2838      57733246 
+ 2838      72657100 
+ 2839              	.LASF76:
+ 2840 04a6 70657269 		.ascii	"periTrGrOffset\000"
+ 2840      54724772 
+ 2840      4F666673 
+ 2840      657400
+ 2841              	.LASF103:
+ 2842 04b5 63707573 		.ascii	"cpussRam1Ctl0\000"
+ 2842      7352616D 
+ 2842      3143746C 
+ 2842      3000
+ 2843              	.LASF169:
+ 2844 04c3 4144435F 		.ascii	"ADC_1_allConfigs\000"
+ 2844      315F616C 
+ 2844      6C436F6E 
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 58
+
+
+ 2844      66696773 
+ 2844      00
+ 2845              	.LASF121:
+ 2846 04d4 72616E67 		.ascii	"rangeThres\000"
+ 2846      65546872 
+ 2846      657300
+ 2847              	.LASF146:
+ 2848 04df 63624576 		.ascii	"cbEvents\000"
+ 2848      656E7473 
+ 2848      00
+ 2849              	.LASF77:
+ 2850 04e8 70657269 		.ascii	"periTrGrSize\000"
+ 2850      54724772 
+ 2850      53697A65 
+ 2850      00
+ 2851              	.LASF35:
+ 2852 04f5 6770696F 		.ascii	"gpioVersion\000"
+ 2852      56657273 
+ 2852      696F6E00 
+ 2853              	.LASF164:
+ 2854 0501 6E757873 		.ascii	"nuxscale\000"
+ 2854      63616C65 
+ 2854      00
+ 2855              	.LASF150:
+ 2856 050a 6E756D43 		.ascii	"numChannels\000"
+ 2856      68616E6E 
+ 2856      656C7300 
+ 2857              	.LASF107:
+ 2858 0516 63795F73 		.ascii	"cy_stc_device_t\000"
+ 2858      74635F64 
+ 2858      65766963 
+ 2858      655F7400 
+ 2859              	.LASF124:
+ 2860 0526 6368616E 		.ascii	"chanConfig\000"
+ 2860      436F6E66 
+ 2860      696700
+ 2861              	.LASF149:
+ 2862 0531 6368616E 		.ascii	"channelBase\000"
+ 2862      6E656C42 
+ 2862      61736500 
+ 2863              	.LASF7:
+ 2864 053d 5F5F696E 		.ascii	"__int32_t\000"
+ 2864      7433325F 
+ 2864      7400
+ 2865              	.LASF53:
+ 2866 0547 65704D6F 		.ascii	"epMonitorNr\000"
+ 2866      6E69746F 
+ 2866      724E7200 
+ 2867              	.LASF138:
+ 2868 0553 72785269 		.ascii	"rxRingBufHead\000"
+ 2868      6E674275 
+ 2868      66486561 
+ 2868      6400
+ 2869              	.LASF96:
+ 2870 0561 63707573 		.ascii	"cpussTrimRamCtlOffset\000"
+ 2870      73547269 
+ 2870      6D52616D 
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 59
+
+
+ 2870      43746C4F 
+ 2870      66667365 
+ 2871              	.LASF159:
+ 2872 0577 78736361 		.ascii	"xscale\000"
+ 2872      6C6500
+ 2873              	.LASF91:
+ 2874 057e 63707573 		.ascii	"cpussCm0ClockCtlOffset\000"
+ 2874      73436D30 
+ 2874      436C6F63 
+ 2874      6B43746C 
+ 2874      4F666673 
+ 2875              	.LASF31:
+ 2876 0595 63707573 		.ascii	"cpussVersion\000"
+ 2876      73566572 
+ 2876      73696F6E 
+ 2876      00
+ 2877              	.LASF179:
+ 2878 05a2 70757473 		.ascii	"puts\000"
+ 2878      00
+ 2879              	.LASF38:
+ 2880 05a7 70657269 		.ascii	"periVersion\000"
+ 2880      56657273 
+ 2880      696F6E00 
+ 2881              	.LASF94:
+ 2882 05b3 63707573 		.ascii	"cpussCm0StatusOffset\000"
+ 2882      73436D30 
+ 2882      53746174 
+ 2882      75734F66 
+ 2882      66736574 
+ 2883              	.LASF162:
+ 2884 05c8 6E757472 		.ascii	"nutrigger_level\000"
+ 2884      69676765 
+ 2884      725F6C65 
+ 2884      76656C00 
+ 2885              	.LASF19:
+ 2886 05d8 73697A65 		.ascii	"sizetype\000"
+ 2886      74797065 
+ 2886      00
+ 2887              	.LASF68:
+ 2888 05e1 64774368 		.ascii	"dwChOffset\000"
+ 2888      4F666673 
+ 2888      657400
+ 2889              	.LASF171:
+ 2890 05ec 73736361 		.ascii	"sscanf\000"
+ 2890      6E6600
+ 2891              	.LASF161:
+ 2892 05f3 73746172 		.ascii	"startNstop\000"
+ 2892      744E7374 
+ 2892      6F7000
+ 2893              	.LASF43:
+ 2894 05fe 63707573 		.ascii	"cpussFlashPaSize\000"
+ 2894      73466C61 
+ 2894      73685061 
+ 2894      53697A65 
+ 2894      00
+ 2895              	.LASF120:
+ 2896 060f 73616D70 		.ascii	"sampleTime23\000"
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 60
+
+
+ 2896      6C655469 
+ 2896      6D653233 
+ 2896      00
+ 2897              	.LASF81:
+ 2898 061c 70657269 		.ascii	"periDivCmdPaTypeSelPos\000"
+ 2898      44697643 
+ 2898      6D645061 
+ 2898      54797065 
+ 2898      53656C50 
+ 2899              	.LASF104:
+ 2900 0633 63707573 		.ascii	"cpussRam2Ctl0\000"
+ 2900      7352616D 
+ 2900      3243746C 
+ 2900      3000
+ 2901              	.LASF157:
+ 2902 0641 74726967 		.ascii	"trigger_slope\000"
+ 2902      6765725F 
+ 2902      736C6F70 
+ 2902      6500
+ 2903              	.LASF130:
+ 2904 064f 636F6E66 		.ascii	"configRouting\000"
+ 2904      6967526F 
+ 2904      7574696E 
+ 2904      6700
+ 2905              	.LASF72:
+ 2906 065d 64775374 		.ascii	"dwStatusChIdxPos\000"
+ 2906      61747573 
+ 2906      43684964 
+ 2906      78506F73 
+ 2906      00
+ 2907              	.LASF163:
+ 2908 066e 6E757472 		.ascii	"nutrigger_channel\000"
+ 2908      69676765 
+ 2908      725F6368 
+ 2908      616E6E65 
+ 2908      6C00
+ 2909              	.LASF135:
+ 2910 0680 72785374 		.ascii	"rxStatus\000"
+ 2910      61747573 
+ 2910      00
+ 2911              	.LASF34:
+ 2912 0689 666C6173 		.ascii	"flashcVersion\000"
+ 2912      68635665 
+ 2912      7273696F 
+ 2912      6E00
+ 2913              	.LASF30:
+ 2914 0697 63727970 		.ascii	"cryptoBase\000"
+ 2914      746F4261 
+ 2914      736500
+ 2915              	.LASF51:
+ 2916 06a2 736D6966 		.ascii	"smifDeviceNr\000"
+ 2916      44657669 
+ 2916      63654E72 
+ 2916      00
+ 2917              	.LASF127:
+ 2918 06af 72616E67 		.ascii	"rangeIntrMask\000"
+ 2918      65496E74 
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 61
+
+
+ 2918      724D6173 
+ 2918      6B00
+ 2919              	.LASF174:
+ 2920 06bd 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2920      43313120 
+ 2920      352E342E 
+ 2920      31203230 
+ 2920      31363036 
+ 2921 06f0 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m4 -mfloat-abi=s"
+ 2921      20726576 
+ 2921      6973696F 
+ 2921      6E203233 
+ 2921      37373135 
+ 2922 0723 6F667466 		.ascii	"oftfp -mfpu=fpv4-sp-d16 -mthumb -g -Og -ffunction-s"
+ 2922      70202D6D 
+ 2922      6670753D 
+ 2922      66707634 
+ 2922      2D73702D 
+ 2923 0756 65637469 		.ascii	"ections -ffat-lto-objects\000"
+ 2923      6F6E7320 
+ 2923      2D666661 
+ 2923      742D6C74 
+ 2923      6F2D6F62 
+ 2924              	.LASF160:
+ 2925 0770 79736361 		.ascii	"yscale\000"
+ 2925      6C6500
+ 2926              	.LASF109:
+ 2927 0777 666C6F61 		.ascii	"float\000"
+ 2927      7400
+ 2928              	.LASF73:
+ 2929 077d 64775374 		.ascii	"dwStatusChIdxMsk\000"
+ 2929      61747573 
+ 2929      43684964 
+ 2929      784D736B 
+ 2929      00
+ 2930              	.LASF167:
+ 2931 078e 63795F64 		.ascii	"cy_device\000"
+ 2931      65766963 
+ 2931      6500
+ 2932              	.LASF101:
+ 2933 0798 63707573 		.ascii	"cpussRomCtl\000"
+ 2933      73526F6D 
+ 2933      43746C00 
+ 2934              	.LASF71:
+ 2935 07a4 64774368 		.ascii	"dwChCtlPreemptablePos\000"
+ 2935      43746C50 
+ 2935      7265656D 
+ 2935      70746162 
+ 2935      6C65506F 
+ 2936              	.LASF145:
+ 2937 07ba 74784C65 		.ascii	"txLeftToTransmit\000"
+ 2937      6674546F 
+ 2937      5472616E 
+ 2937      736D6974 
+ 2937      00
+ 2938              	.LASF123:
+ 2939 07cb 6368616E 		.ascii	"chanEn\000"
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 62
+
+
+ 2939      456E00
+ 2940              	.LASF24:
+ 2941 07d2 75646242 		.ascii	"udbBase\000"
+ 2941      61736500 
+ 2942              	.LASF113:
+ 2943 07da 43595F53 		.ascii	"CY_SAR_RANGE_COND_INSIDE\000"
+ 2943      41525F52 
+ 2943      414E4745 
+ 2943      5F434F4E 
+ 2943      445F494E 
+ 2944              	.LASF111:
+ 2945 07f3 5F426F6F 		.ascii	"_Bool\000"
+ 2945      6C00
+ 2946              	.LASF17:
+ 2947 07f9 696E7433 		.ascii	"int32_t\000"
+ 2947      325F7400 
+ 2948              	.LASF2:
+ 2949 0801 756E7369 		.ascii	"unsigned char\000"
+ 2949      676E6564 
+ 2949      20636861 
+ 2949      7200
+ 2950              	.LASF67:
+ 2951 080f 666C6173 		.ascii	"flashCtlMainWs4Freq\000"
+ 2951      6843746C 
+ 2951      4D61696E 
+ 2951      57733446 
+ 2951      72657100 
+ 2952              	.LASF0:
+ 2953 0823 73686F72 		.ascii	"short int\000"
+ 2953      7420696E 
+ 2953      7400
+ 2954              	.LASF128:
+ 2955 082d 6D757853 		.ascii	"muxSwitch\000"
+ 2955      77697463 
+ 2955      6800
+ 2956              	.LASF175:
+ 2957 0837 636F6D6D 		.ascii	"commandargparser.c\000"
+ 2957      616E6461 
+ 2957      72677061 
+ 2957      72736572 
+ 2957      2E6300
+ 2958              	.LASF125:
+ 2959 084a 696E7472 		.ascii	"intrMask\000"
+ 2959      4D61736B 
+ 2959      00
+ 2960              	.LASF78:
+ 2961 0853 70657269 		.ascii	"periDivCmdDivSelMsk\000"
+ 2961      44697643 
+ 2961      6D644469 
+ 2961      7653656C 
+ 2961      4D736B00 
+ 2962              	.LASF49:
+ 2963 0867 73727373 		.ascii	"srssNumHfroot\000"
+ 2963      4E756D48 
+ 2963      66726F6F 
+ 2963      7400
+ 2964              	.LASF62:
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 63
+
+
+ 2965 0875 666C6173 		.ascii	"flashEraseDelay\000"
+ 2965      68457261 
+ 2965      73654465 
+ 2965      6C617900 
+ 2966              	.LASF82:
+ 2967 0885 70657269 		.ascii	"periDiv8CtlOffset\000"
+ 2967      44697638 
+ 2967      43746C4F 
+ 2967      66667365 
+ 2967      7400
+ 2968              	.LASF18:
+ 2969 0897 75696E74 		.ascii	"uint32_t\000"
+ 2969      33325F74 
+ 2969      00
+ 2970              	.LASF168:
+ 2971 08a0 4144435F 		.ascii	"ADC_1_currentConfig\000"
+ 2971      315F6375 
+ 2971      7272656E 
+ 2971      74436F6E 
+ 2971      66696700 
+ 2972              	.LASF100:
+ 2973 08b4 63707573 		.ascii	"cpussCm4NmiCtlOffset\000"
+ 2973      73436D34 
+ 2973      4E6D6943 
+ 2973      746C4F66 
+ 2973      66736574 
+ 2974              	.LASF131:
+ 2975 08c9 76726566 		.ascii	"vrefMvValue\000"
+ 2975      4D765661 
+ 2975      6C756500 
+ 2976              	.LASF20:
+ 2977 08d5 6C6F6E67 		.ascii	"long double\000"
+ 2977      20646F75 
+ 2977      626C6500 
+ 2978              	.LASF108:
+ 2979 08e1 63686172 		.ascii	"char\000"
+ 2979      00
+ 2980              	.LASF39:
+ 2981 08e6 70726F74 		.ascii	"protVersion\000"
+ 2981      56657273 
+ 2981      696F6E00 
+ 2982              	.LASF155:
+ 2983 08f2 6D6F6465 		.ascii	"mode\000"
+ 2983      00
+ 2984              	.LASF102:
+ 2985 08f7 63707573 		.ascii	"cpussRam0Ctl0\000"
+ 2985      7352616D 
+ 2985      3043746C 
+ 2985      3000
+ 2986              	.LASF5:
+ 2987 0905 5F5F7569 		.ascii	"__uint16_t\000"
+ 2987      6E743136 
+ 2987      5F7400
+ 2988              	.LASF83:
+ 2989 0910 70657269 		.ascii	"periDiv16CtlOffset\000"
+ 2989      44697631 
+ 2989      3643746C 
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 64
+
+
+ 2989      4F666673 
+ 2989      657400
+ 2990              	.LASF165:
+ 2991 0923 6E757973 		.ascii	"nuyscale\000"
+ 2991      63616C65 
+ 2991      00
+ 2992              	.LASF14:
+ 2993 092c 75696E74 		.ascii	"uint8_t\000"
+ 2993      385F7400 
+ 2994              	.LASF36:
+ 2995 0934 6873696F 		.ascii	"hsiomVersion\000"
+ 2995      6D566572 
+ 2995      73696F6E 
+ 2995      00
+ 2996              	.LASF61:
+ 2997 0941 666C6173 		.ascii	"flashProgramDelay\000"
+ 2997      6850726F 
+ 2997      6772616D 
+ 2997      44656C61 
+ 2997      7900
+ 2998              	.LASF117:
+ 2999 0953 6374726C 		.ascii	"ctrl\000"
+ 2999      00
+ 3000              	.LASF137:
+ 3001 0958 72785269 		.ascii	"rxRingBufSize\000"
+ 3001      6E674275 
+ 3001      6653697A 
+ 3001      6500
+ 3002              	.LASF152:
+ 3003 0966 6D697363 		.ascii	"miscConfig\000"
+ 3003      436F6E66 
+ 3003      696700
+ 3004              	.LASF69:
+ 3005 0971 64774368 		.ascii	"dwChSize\000"
+ 3005      53697A65 
+ 3005      00
+ 3006              	.LASF105:
+ 3007 097a 69706353 		.ascii	"ipcStructSize\000"
+ 3007      74727563 
+ 3007      7453697A 
+ 3007      6500
+ 3008              	.LASF44:
+ 3009 0988 63707573 		.ascii	"cpussIpc0Irq\000"
+ 3009      73497063 
+ 3009      30497271 
+ 3009      00
+ 3010              	.LASF87:
+ 3011 0995 6770696F 		.ascii	"gpioPrtCfgOffset\000"
+ 3011      50727443 
+ 3011      66674F66 
+ 3011      66736574 
+ 3011      00
+ 3012              	.LASF147:
+ 3013 09a6 696E6974 		.ascii	"initKey\000"
+ 3013      4B657900 
+ 3014              	.LASF140:
+ 3015 09ae 72784275 		.ascii	"rxBuf\000"
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 65
+
+
+ 3015      6600
+ 3016              	.LASF148:
+ 3017 09b4 63795F73 		.ascii	"cy_stc_scb_uart_context_t\000"
+ 3017      74635F73 
+ 3017      63625F75 
+ 3017      6172745F 
+ 3017      636F6E74 
+ 3018              	.LASF122:
+ 3019 09ce 72616E67 		.ascii	"rangeCond\000"
+ 3019      65436F6E 
+ 3019      6400
+ 3020              	.LASF46:
+ 3021 09d8 63707573 		.ascii	"cpussNotConnectedIrq\000"
+ 3021      734E6F74 
+ 3021      436F6E6E 
+ 3021      65637465 
+ 3021      64497271 
+ 3022              	.LASF60:
+ 3023 09ed 666C6173 		.ascii	"flashWriteDelay\000"
+ 3023      68577269 
+ 3023      74654465 
+ 3023      6C617900 
+ 3024              	.LASF118:
+ 3025 09fd 73616D70 		.ascii	"sampleCtrl\000"
+ 3025      6C654374 
+ 3025      726C00
+ 3026              	.LASF154:
+ 3027 0a08 4144435F 		.ascii	"ADC_1_CONFIG_STRUCT\000"
+ 3027      315F434F 
+ 3027      4E464947 
+ 3027      5F535452 
+ 3027      55435400 
+ 3028              	.LASF93:
+ 3029 0a1c 63707573 		.ascii	"cpussCm4StatusOffset\000"
+ 3029      73436D34 
+ 3029      53746174 
+ 3029      75734F66 
+ 3029      66736574 
+ 3030              	.LASF86:
+ 3031 0a31 6770696F 		.ascii	"gpioPrtIntrCfgOffset\000"
+ 3031      50727449 
+ 3031      6E747243 
+ 3031      66674F66 
+ 3031      66736574 
+ 3032              	.LASF115:
+ 3033 0a46 43595F53 		.ascii	"CY_SAR_RANGE_COND_OUTSIDE\000"
+ 3033      41525F52 
+ 3033      414E4745 
+ 3033      5F434F4E 
+ 3033      445F4F55 
+ 3034              	.LASF139:
+ 3035 0a60 72785269 		.ascii	"rxRingBufTail\000"
+ 3035      6E674275 
+ 3035      66546169 
+ 3035      6C00
+ 3036              	.LASF97:
+ 3037 0a6e 63707573 		.ascii	"cpussTrimRomCtlOffset\000"
+ARM GAS  C:\Users\RYANHA~1\AppData\Local\Temp\ccAwqD07.s 			page 66
+
+
+ 3037      73547269 
+ 3037      6D526F6D 
+ 3037      43746C4F 
+ 3037      66667365 
+ 3038              	.LASF134:
+ 3039 0a84 74785374 		.ascii	"txStatus\000"
+ 3039      61747573 
+ 3039      00
+ 3040              	.LASF129:
+ 3041 0a8d 6D757853 		.ascii	"muxSwitchSqCtrl\000"
+ 3041      77697463 
+ 3041      68537143 
+ 3041      74726C00 
+ 3042              	.LASF33:
+ 3043 0a9d 64775665 		.ascii	"dwVersion\000"
+ 3043      7273696F 
+ 3043      6E00
+ 3044              	.LASF29:
+ 3045 0aa7 69706342 		.ascii	"ipcBase\000"
+ 3045      61736500 
+ 3046              	.LASF80:
+ 3047 0aaf 70657269 		.ascii	"periDivCmdPaDivSelPos\000"
+ 3047      44697643 
+ 3047      6D645061 
+ 3047      44697653 
+ 3047      656C506F 
+ 3048              	.LASF177:
+ 3049 0ac5 63795F73 		.ascii	"cy_stc_scb_uart_context\000"
+ 3049      74635F73 
+ 3049      63625F75 
+ 3049      6172745F 
+ 3049      636F6E74 
+ 3050              	.LASF58:
+ 3051 0add 666C6173 		.ascii	"flashRwwRequired\000"
+ 3051      68527777 
+ 3051      52657175 
+ 3051      69726564 
+ 3051      00
+ 3052              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

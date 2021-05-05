@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CyXmlSerializer>
+<!--This file is machine generated and read. It is not intended to be edited by hand.-->
+<!--Due to this, there is no schema for this file.-->
+<CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21 type_name="CyDesigner.Common.ProjMgmt.Model.CyPrjMgmtWrkspcCustomData" version="4">
+<CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997 type_name="CyDesigner.Common.Base.CyCustomData" version="2">
+<userData>
+<dataGuid v="5f2be1a5-0687-4501-bb8c-cf21cb8211bf">
+<CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf type_name="CyDesigner.Common.ProjMgmt.GUI.CyBookmarkData" version="1">
+<indicators />
+</CyGuid_5f2be1a5-0687-4501-bb8c-cf21cb8211bf>
+</dataGuid>
+<dataGuid v="1b906a0f-a7b6-4e4d-a428-82f98b53cb35">
+<CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35 type_name="CyDesigner.Common.ProjMgmt.GUI.CyExplorerWindow+CyExplorerWindowState" version="3" SelectedTab="Source">
+<TreeKeys>
+<v>Source</v>
+<v>Components</v>
+<v>Output</v>
+</TreeKeys>
+<TreeStates>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="Final_project_demo-000\Final_project_demo">
+<ExpandedNodeIds>
+<v>Final_project_demo-000</v>
+<v>Final_project_demo-000\Final_project_demo</v>
+<v>Final_project_demo-000\Final_project_demo\TopDesign</v>
+<v>Final_project_demo-000\Final_project_demo\Final_project_demo.cydwr</v>
+<v>Final_project_demo-000\Final_project_demo\Final_project_demo.cydwr\Pins</v>
+<v>Final_project_demo-000\Final_project_demo\Final_project_demo.cydwr\Analog</v>
+<v>Final_project_demo-000\Final_project_demo\Final_project_demo.cydwr\DMA</v>
+<v>Final_project_demo-000\Final_project_demo\Final_project_demo.cydwr\Clocks</v>
+<v>Final_project_demo-000\Final_project_demo\Final_project_demo.cydwr\Interrupts</v>
+<v>Final_project_demo-000\Final_project_demo\Final_project_demo.cydwr\System</v>
+<v>Final_project_demo-000\Final_project_demo\Final_project_demo.cydwr\Directives</v>
+<v>Final_project_demo-000\Final_project_demo\CM0p (Core 0)\ARM GCC Generic</v>
+<v>Final_project_demo-000\Final_project_demo\CM0p (Core 0)\ARM GCC Generic\cy8c6xx7_cm0plus.ld</v>
+<v>Final_project_demo-000\Final_project_demo\CM0p (Core 0)\ARM IAR Generic</v>
+<v>Final_project_demo-000\Final_project_demo\CM0p (Core 0)\ARM IAR Generic\cy8c6xx7_cm0plus.icf</v>
+<v>Final_project_demo-000\Final_project_demo\CM0p (Core 0)\ARM MDK Generic</v>
+<v>Final_project_demo-000\Final_project_demo\CM0p (Core 0)\ARM MDK Generic\cy8c6xx7_cm0plus.scat</v>
+<v>Final_project_demo-000\Final_project_demo\CM0p (Core 0)\Header Files</v>
+<v>Final_project_demo-000\Final_project_demo\CM0p (Core 0)\Source Files</v>
+<v>Final_project_demo-000\Final_project_demo\CM0p (Core 0)\Source Files\ARM GCC Generic</v>
+<v>Final_project_demo-000\Final_project_demo\CM0p (Core 0)\Source Files\ARM GCC Generic\startup_psoc6_01_cm0plus.S</v>
+<v>Final_project_demo-000\Final_project_demo\CM0p (Core 0)\Source Files\ARM IAR Generic</v>
+<v>Final_project_demo-000\Final_project_demo\CM0p (Core 0)\Source Files\ARM IAR Generic\startup_psoc6_01_cm0plus.s</v>
+<v>Final_project_demo-000\Final_project_demo\CM0p (Core 0)\Source Files\ARM MDK Generic</v>
+<v>Final_project_demo-000\Final_project_demo\CM0p (Core 0)\Source Files\ARM MDK Generic\startup_psoc6_01_cm0plus.s</v>
+<v>Final_project_demo-000\Final_project_demo\CM0p (Core 0)\Source Files\main_cm0p.c</v>
+<v>Final_project_demo-000\Final_project_demo\CM0p (Core 0)\Source Files\system_psoc6_cm0plus.c</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\ARM GCC Generic</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\ARM GCC Generic\cy8c6xx7_cm4_dual.ld</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\ARM IAR Generic</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\ARM IAR Generic\cy8c6xx7_cm4_dual.icf</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\ARM MDK Generic</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\ARM MDK Generic\cy8c6xx7_cm4_dual.scat</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Header Files</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Header Files\commandargparser.h</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Header Files\communication.h</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Header Files\graphicaldisplay.h</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\ARM GCC Generic</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\ARM GCC Generic\startup_psoc6_01_cm4.S</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\ARM IAR Generic</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\ARM IAR Generic\startup_psoc6_01_cm4.s</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\ARM MDK Generic</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\ARM MDK Generic\startup_psoc6_01_cm4.s</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\Images</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\Images\Cypress Logo Full Color_PNG_316pixels.c</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\Images\KS124117-2.c</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\commandargparser.c</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\communication.c</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\graphicaldisplay.c</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\main_cm4.c</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\system_psoc6_cm4.c</v>
+<v>Final_project_demo-000\Final_project_demo\Shared Files</v>
+<v>Final_project_demo-000\Final_project_demo\Shared Files\cyapicallbacks.h</v>
+<v>Final_project_demo-000\Final_project_demo\Shared Files\GUI_X.c</v>
+<v>Final_project_demo-000\Final_project_demo\Shared Files\GUIConf.c</v>
+<v>Final_project_demo-000\Final_project_demo\Shared Files\GUIConf.h</v>
+<v>Final_project_demo-000\Final_project_demo\Shared Files\LCDConf.c</v>
+<v>Final_project_demo-000\Final_project_demo\Shared Files\LCDConf.h</v>
+<v>Final_project_demo-000\Final_project_demo\Shared Files\stdio_user.c</v>
+<v>Final_project_demo-000\Final_project_demo\Shared Files\stdio_user.h</v>
+<v>Final_project_demo-000\Final_project_demo\Shared Files\system_psoc6.h</v>
+<v>Final_project_demo-000\Final_project_demo\Generated_Source</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Header Files\commandargparser.h</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Header Files\communication.h</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Header Files\graphicaldisplay.h</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\ARM GCC Generic</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\ARM GCC Generic\startup_psoc6_01_cm4.S</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\ARM IAR Generic</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\ARM IAR Generic\startup_psoc6_01_cm4.s</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\ARM MDK Generic</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\ARM MDK Generic\startup_psoc6_01_cm4.s</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\Images</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\Images\Cypress Logo Full Color_PNG_316pixels.c</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\Images\KS124117-2.c</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\commandargparser.c</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\communication.c</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\graphicaldisplay.c</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\main_cm4.c</v>
+<v>Final_project_demo-000\Final_project_demo\CM4 (Core 1)\Source Files\system_psoc6_cm4.c</v>
+<v>Final_project_demo-000\Final_project_demo\Shared Files</v>
+<v>Final_project_demo-000\Final_project_demo\Shared Files\cyapicallbacks.h</v>
+<v>Final_project_demo-000\Final_project_demo\Shared Files\GUI_X.c</v>
+<v>Final_project_demo-000\Final_project_demo\Shared Files\GUIConf.c</v>
+<v>Final_project_demo-000\Final_project_demo\Shared Files\GUIConf.h</v>
+<v>Final_project_demo-000\Final_project_demo\Shared Files\LCDConf.c</v>
+<v>Final_project_demo-000\Final_project_demo\Shared Files\LCDConf.h</v>
+<v>Final_project_demo-000\Final_project_demo\Shared Files\stdio_user.c</v>
+<v>Final_project_demo-000\Final_project_demo\Shared Files\stdio_user.h</v>
+<v>Final_project_demo-000\Final_project_demo\Shared Files\system_psoc6.h</v>
+<v>Final_project_demo-000\Final_project_demo\Generated_Source</v>
+<v>Final_project_demo-000\Final_project_demo\Generated_Source\PSoC6</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>Final_project_demo-000</v>
+<v>Final_project_demo-000\Final_project_demo</v>
+<v>Final_project_demo-000\Final_project_demo\TopDesign</v>
+<v>Final_project_demo-000\Final_project_demo\TopDesign\TopDesign.cysch</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Final_project_demo-000</v>
+<v>Final_project_demo-000\Final_project_demo</v>
+<v>Final_project_demo-000\Final_project_demo\TopDesign</v>
+<v>Final_project_demo-000\Final_project_demo\TopDesign\TopDesign.cysch</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>Final_project_demo-000</v>
+<v>Final_project_demo-000\Final_project_demo</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\ADC_1.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\ADC_1_INIT.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\ADC_1_INT.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\ADC_1_PM.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_ble_clk.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_device.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_dma.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_efuse.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_flash.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_gpio.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_ipc_drv.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_ipc_pipe.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_ipc_sema.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_lvd.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_profile.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_prot.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_sar.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_scb_common.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_scb_ezi2c.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_scb_i2c.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_scb_spi.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_scb_uart.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_sysanalog.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_sysclk.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_sysint.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_syslib.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_syslib_gcc.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_syspm.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_systick.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_trigmux.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_wdt.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cyfitter_sysint_cfg.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\DMA_1.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\GraphicLCDIntf_1.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\GraphicLCDIntf_1_PM.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\GUI_X.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\GUIConf.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\LCDConf.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\main_cm0p.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\retarget.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\startup_psoc6_01_cm0plus.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\stdio_user.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\system_psoc6_cm0plus.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\UART_1.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Final_project_demo.elf</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Final_project_demo.hex</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Final_project_demo.map</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\ADC_1.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\ADC_1_INIT.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\ADC_1_INT.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\ADC_1_PM.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\commandargparser.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\communication.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_ble_clk.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_device.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_dma.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_efuse.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_flash.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_gpio.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_ipc_drv.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_ipc_pipe.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_ipc_sema.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_lvd.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_profile.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_prot.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_sar.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_scb_common.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_scb_ezi2c.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_scb_i2c.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_scb_spi.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_scb_uart.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_sysanalog.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_sysclk.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_sysint.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_syslib.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_syslib_gcc.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_syspm.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_systick.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_trigmux.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cy_wdt.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cyfitter_sysint_cfg.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\Cypress Logo Full Color_PNG_316pixels.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\DMA_1.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\graphicaldisplay.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\GraphicLCDIntf_1.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\GraphicLCDIntf_1_PM.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\GUI_X.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\GUIConf.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\KS124117-2.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\LCDConf.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\main_cm4.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\retarget.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\startup_psoc6_01_cm4.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\stdio_user.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\system_psoc6_cm4.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Listing Files\UART_1.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Final_project_demo.elf</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Final_project_demo.hex</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM4\ARM_GCC_541\Debug\Final_project_demo.map</v>
+<v>Final_project_demo-000\Final_project_demo\Final_project_demo.gpdsc</v>
+<v>Final_project_demo-000\Final_project_demo\Final_project_demo.rpt</v>
+<v>Final_project_demo-000\Final_project_demo\Final_project_demo_timing.html</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Final_project_demo-000</v>
+<v>Final_project_demo-000\Final_project_demo</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\ADC_1.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\ADC_1_INIT.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\ADC_1_INT.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\ADC_1_PM.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_ble_clk.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_device.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_dma.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_efuse.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_flash.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_gpio.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_ipc_drv.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_ipc_pipe.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_ipc_sema.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_lvd.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_profile.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_prot.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_sar.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_scb_common.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_scb_ezi2c.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_scb_i2c.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_scb_spi.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_scb_uart.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_sysanalog.lst</v>
+<v>Final_project_demo-000\Final_project_demo\CortexM0p\ARM_GCC_541\Debug\Listing Files\cy_sysclk.lst</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStates>
+<TreeKeysV2>
+<v>Datasheet</v>
+</TreeKeysV2>
+<TreeStatesV2>
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="">
+<ExpandedNodeIds>
+<v>Final_project_demo-000</v>
+<v>Final_project_demo-000\Final_project_demo</v>
+<v>Final_project_demo-000\Final_project_demo\PSoC 6 Architecture TRM</v>
+<v>Final_project_demo-000\Final_project_demo\PSoC 63 Family Datasheet</v>
+<v>Final_project_demo-000\Final_project_demo\Peripheral Driver Library</v>
+<v>Final_project_demo-000\Final_project_demo\System Reference Guides</v>
+<v>Final_project_demo-000\Final_project_demo\DMA_PDL_v2_0.pdf</v>
+<v>Final_project_demo-000\Final_project_demo\GPIO_PDL_v1_0</v>
+<v>Final_project_demo-000\Final_project_demo\GPIO_PDL_v1_0\GPIO_PDL_v1_0.pdf</v>
+<v>Final_project_demo-000\Final_project_demo\GraphicLCDIntf_v1_80.pdf</v>
+<v>Final_project_demo-000\Final_project_demo\Scan_ADC_P6_v3_10.pdf</v>
+<v>Final_project_demo-000\Final_project_demo\SCB_UART_PDL_v2_0.pdf</v>
+<v>Final_project_demo-000\Final_project_demo\SysClk_PDL_v1_0.pdf</v>
+<v>Final_project_demo-000\Final_project_demo\SysInt_PDL_v1_0</v>
+<v>Final_project_demo-000\Final_project_demo\SysInt_PDL_v1_0\SysInt_PDL_v1_0.pdf</v>
+</ExpandedNodeIds>
+<VisibleNodeIds>
+<v>Final_project_demo-000</v>
+<v>Final_project_demo-000\Final_project_demo</v>
+<v>Final_project_demo-000\Final_project_demo\PSoC 6 Architecture TRM</v>
+<v>Final_project_demo-000\Final_project_demo\PSoC 63 Family Datasheet</v>
+<v>Final_project_demo-000\Final_project_demo\Peripheral Driver Library</v>
+<v>Final_project_demo-000\Final_project_demo\System Reference Guides</v>
+<v>Final_project_demo-000\Final_project_demo\DMA_PDL_v2_0.pdf</v>
+<v>Final_project_demo-000\Final_project_demo\GPIO_PDL_v1_0</v>
+<v>Final_project_demo-000\Final_project_demo\GPIO_PDL_v1_0\GPIO_PDL_v1_0.pdf</v>
+<v>Final_project_demo-000\Final_project_demo\GraphicLCDIntf_v1_80.pdf</v>
+<v>Final_project_demo-000\Final_project_demo\Scan_ADC_P6_v3_10.pdf</v>
+<v>Final_project_demo-000\Final_project_demo\SCB_UART_PDL_v2_0.pdf</v>
+<v>Final_project_demo-000\Final_project_demo\SysClk_PDL_v1_0.pdf</v>
+<v>Final_project_demo-000\Final_project_demo\SysInt_PDL_v1_0</v>
+<v>Final_project_demo-000\Final_project_demo\SysInt_PDL_v1_0\SysInt_PDL_v1_0.pdf</v>
+</VisibleNodeIds>
+</CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
+</TreeStatesV2>
+</CyGuid_1b906a0f-a7b6-4e4d-a428-82f98b53cb35>
+</dataGuid>
+</userData>
+</CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
+<Unloaded />
+<OpenDocs>
+<name v=".\main_cm4.c" />
+</OpenDocs>
+<OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
+
+  Actipro Docking/MDI for WinForms
+  Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
+  http://www.actiprosoftware.com
+
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="802, 600" SelectedTabbedMdiWindow="43dfbeab-d32f-4b7a-8fdb-6f168529a193"><DocumentWindow Key="C:\Users\Ryan Haque\Documents\PSoC Creator\Final_project_demo.cydsn\main_cm4.c" Guid="43dfbeab-d32f-4b7a-8fdb-6f168529a193" /><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="427df496-5182-4e0e-846a-2d5940c73476" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+<config v="" />
+<AutoUpdate v="true" />
+</CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>
+</CyXmlSerializer>
